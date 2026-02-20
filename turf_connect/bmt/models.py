@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 
 class Profile(models.Model):
@@ -7,7 +7,7 @@ class Profile(models.Model):
         ('owner', 'Owner'),
     )
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, blank=True)
     phone = models.CharField(max_length=15, blank=True)
 

@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles', 
     'bmt.apps.BmtConfig',
+    'accounts.apps.AccountsConfig',
+    'turfs.apps.TurfsConfig',
+    'bookings.apps.BookingsConfig',
+    'payments.apps.PaymentsConfig',
+    'adminpanel.apps.AdminpanelConfig',
 ]
 
 MIDDLEWARE = [
@@ -113,12 +118,15 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/login/'
+LOGOUT_REDIRECT_URL = 'login'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 

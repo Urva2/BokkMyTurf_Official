@@ -15,15 +15,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from bmt import views
+from django.urls import path, include
+from bmt import views as bmt_views
+from accounts import views as accounts_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('player/', views.player_home, name='player_home'),
-    path('owner/', views.owner_home, name='owner_home'),
-    path('', views.login_request, name='home'),
-    path('login/', views.login_request, name='login'), 
-    path('logout/', views.logout_request, name='logout'),
-    path('register/player/', views.register_player, name='register_player'),
-    path('register/owner/', views.register_owner, name='register_owner'),
+
+    # Auth (accounts app)
+    path('', accounts_views.login_view, name='home'),
+    path('accounts/', include('accounts.urls')),
+
+    # Dashboards (bmt app)
+    path('player/', bmt_views.player_home, name='player_dashboard'),
+    path('owner/', bmt_views.owner_home, name='owner_dashboard'),
+    path('admin-panel/', bmt_views.admin_dashboard, name='admin_dashboard'),
 ]

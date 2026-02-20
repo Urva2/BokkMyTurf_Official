@@ -1,0 +1,104 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BookMyTurf | Player Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0D0D0D;
+            color: #FFFFFF;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            color: #00D4FF;
+        }
+
+        .dashboard-header p {
+            color: #999;
+            margin-top: 8px;
+        }
+
+        .welcome-card {
+            background: #1A1A1A;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .welcome-card h2 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .welcome-card p {
+            color: #999;
+            margin-bottom: 24px;
+        }
+
+        .logout-btn {
+            background: #00D4FF;
+            color: #000;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 12px 32px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-header">
+        <h1>🏟️ BOOKMYTURF</h1>
+        <p>Player Dashboard</p>
+    </div>
+
+    <div class="welcome-card">
+        <h2>Welcome, {{ user.username }}! 👋</h2>
+        <p>You're logged in as <strong>{{ user.email }}</strong></p>
+        <p style="color: #00D4FF; font-weight: 600;">Role: Player</p>
+        <br>
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">LOGOUT</button>
+        </form>
+    </div>
+</body>
+
+</html>
