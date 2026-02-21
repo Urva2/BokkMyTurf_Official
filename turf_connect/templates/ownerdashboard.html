@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +9,9 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap"
+    rel="stylesheet" />
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -20,9 +23,11 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     html {
       scroll-behavior: smooth;
     }
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: #0D0D0D;
@@ -31,22 +36,22 @@
       min-height: 100vh;
       padding: 20px;
       user-select: none;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
     }
+
     a {
       color: var(--accent-primary);
       text-decoration: none;
       font-weight: 600;
       transition: color 0.2s ease;
     }
+
     a:hover,
     a:focus-visible {
       color: #00D4FF;
       outline: none;
       text-decoration: underline;
     }
+
     ::selection {
       background: rgba(0, 212, 255, 0.22);
     }
@@ -54,428 +59,654 @@
     /* VARIABLES */
     :root {
       --accent-primary: #00D4FF;
+      --accent-green: #4ade80;
       --bg-secondary: #1A1A1A;
+      --bg-tertiary: #262626;
       --radius-card: 16px;
-      --radius-button: 16px;
+      --radius-button: 12px;
       --transition-fast: all 0.2s ease-in-out;
-      --text-muted: #666666;
-      --shadow-default: 0 8px 34px rgba(0, 0, 0, 0.45);
-      --shadow-hover: 0 22px 60px rgba(0, 212, 255, 0.1);
-      --shadow-button: 0 0 20px rgba(0, 212, 255, 0.4);
+      --text-muted: #888888;
+      --shadow-default: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --shadow-hover: 0 8px 30px rgba(0, 212, 255, 0.08);
     }
 
-    /* CONTAINER */
-    .container {
-      max-width: 1200px;
-      width: 100%;
+    /* ============ PAGE LAYOUT ============ */
+    .page-wrapper {
+      display: flex;
+      gap: 24px;
+      max-width: 1300px;
+      margin: 0 auto;
+      align-items: flex-start;
+    }
+
+    /* ============ LEFT SIDEBAR ============ */
+    .sidebar {
+      width: 240px;
+      flex-shrink: 0;
       background: var(--bg-secondary);
       border-radius: var(--radius-card);
-      padding: 40px 48px;
-      box-shadow: var(--shadow-default);
+      padding: 32px 20px;
       display: flex;
       flex-direction: column;
-      gap: 48px;
+      align-items: center;
+      gap: 16px;
+      position: sticky;
+      top: 20px;
     }
 
-    /* WELCOME */
-    .welcome {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      color: var(--accent-primary);
-      user-select: none;
-      margin-bottom: 8px;
-    }
-    .welcome-subtitle {
-      font-weight: 600;
-      font-size: 18px;
-      color: var(--text-muted);
-      user-select: none;
-    }
-
-    /* STATS CARDS GRID */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      user-select: none;
-    }
-    .stat-card {
-      background: var(--bg-tertiary, #262626);
-      border-radius: var(--radius-card);
-      padding: 24px 20px;
-      box-shadow: var(--shadow-default);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      cursor: default;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .stat-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-      border: 1px solid var(--accent-primary);
-    }
-    .stat-icon {
-      font-size: 36px;
-      color: var(--accent-primary);
-      user-select: none;
-    }
-    .stat-label {
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--text-muted);
-      user-select: none;
-    }
-    .stat-value {
-      font-weight: 900;
-      font-size: 28px;
-      color: var(--text-primary);
-      user-select: none;
-    }
-    .stat-trend {
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--accent-primary);
+    .sidebar-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--bg-tertiary);
       display: flex;
       align-items: center;
-      gap: 6px;
-      user-select: none;
-    }
-    .stat-trend.up i {
-      color: #4ade80; /* green */
+      justify-content: center;
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--accent-primary);
+      border: 2px solid var(--accent-primary);
     }
 
-    /* TODAY'S SCHEDULE */
-    .schedule-section {
-      user-select: none;
+    .sidebar-name {
+      font-weight: 700;
+      font-size: 16px;
+      text-align: center;
     }
-    .schedule-header {
+
+    .sidebar-email {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+      word-break: break-all;
+      user-select: text;
+    }
+
+    .sidebar-role {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(0, 212, 255, 0.15);
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+    }
+
+    .sidebar-btn {
+      width: 100%;
+      padding: 10px 16px;
+      background: var(--bg-tertiary);
+      border: 1px solid #404040;
+      border-radius: var(--radius-button);
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition-fast);
+      text-decoration: none;
+      margin-top: 8px;
+    }
+
+    .sidebar-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      text-decoration: none;
+    }
+
+    .sidebar-logout {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid #333;
+      width: 100%;
+    }
+
+    .sidebar-logout button {
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid #ff4d4d;
+      border-radius: var(--radius-button);
+      color: #ff4d4d;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition-fast);
+    }
+
+    .sidebar-logout button:hover {
+      background: rgba(255, 77, 77, 0.1);
+    }
+
+    /* ============ MAIN CONTENT ============ */
+    .main-content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* --- Top Header Bar --- */
+    .top-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
+    }
+
+    .top-header-left h1 {
+      font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      font-size: 22px;
+      font-size: 26px;
+      color: #fff;
+    }
+
+    .top-header-left p {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .top-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-add-turf {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--accent-green);
+      color: #000;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: var(--radius-button);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .btn-add-turf:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      text-decoration: none;
+      color: #000;
+    }
+
+    .btn-menu {
+      width: 36px;
+      height: 36px;
+      background: var(--bg-tertiary);
+      border: 1px solid #404040;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+    }
+
+    .btn-menu:hover {
+      border-color: var(--accent-primary);
       color: var(--accent-primary);
     }
-    .schedule-list {
-      max-height: 320px;
-      overflow-y: auto;
+
+    /* --- Summary Cards --- */
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .summary-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-card);
+      padding: 28px 24px;
+      border: 1px solid #2a2a2a;
+      text-align: center;
+      transition: var(--transition-fast);
+      cursor: default;
+    }
+
+    .summary-card:hover {
+      border-color: var(--accent-primary);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .summary-card .card-value {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 42px;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .summary-card .card-label {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* --- Tab Navigation --- */
+    .tab-nav {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid #2a2a2a;
+      padding-bottom: 0;
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+    }
+
+    .tab-btn.active {
+      color: var(--accent-primary);
+      border-bottom-color: var(--accent-primary);
+    }
+
+    /* --- Tab Content --- */
+    .tab-content {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      border: 1px solid #2a2a2a;
+      min-height: 200px;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* --- Filter Bar --- */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .filter-bar label {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .filter-bar select {
+      background: var(--bg-tertiary);
+      border: 1px solid #404040;
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #fff;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+    }
+
+    .filter-bar select:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+    }
+
+    /* --- Empty State --- */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    /* --- Booking Items (reused in Recent Bookings tab) --- */
+    .booking-list {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      padding-right: 8px;
+      gap: 12px;
     }
+
     .booking-item {
-      background: var(--bg-tertiary, #262626);
+      background: var(--bg-tertiary);
       border-radius: var(--radius-card);
-      padding: 20px 24px;
-      box-shadow: var(--shadow-default);
+      padding: 16px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      transition: box-shadow 0.25s ease;
+      transition: var(--transition-fast);
       cursor: default;
     }
+
     .booking-item:hover {
       box-shadow: var(--shadow-hover);
-      transform: translateY(-4px);
+      transform: translateY(-2px);
     }
+
     .booking-time {
       font-weight: 700;
-      font-size: 18px;
+      font-size: 15px;
       color: var(--accent-primary);
-      min-width: 140px;
-      user-select: none;
+      min-width: 130px;
     }
+
     .booking-details {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      user-select: none;
+      gap: 4px;
     }
+
     .booking-player {
       font-weight: 700;
-      font-size: 16px;
-      color: var(--text-primary);
+      font-size: 15px;
     }
+
     .booking-contact {
-      font-weight: 600;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-muted);
       display: flex;
       align-items: center;
+      gap: 10px;
+    }
+
+    .booking-status-badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(0, 212, 255, 0.15);
+      color: var(--accent-primary);
+      text-transform: uppercase;
+    }
+
+    /* --- Turf Cards (My Turfs tab) --- */
+    .turf-list {
+      display: flex;
+      flex-direction: column;
       gap: 12px;
     }
-    .contact-button {
-      background: var(--accent-primary);
-      color: #000;
-      font-weight: 700;
-      font-size: 14px;
-      padding: 6px 14px;
-      border-radius: var(--radius-button);
-      cursor: pointer;
-      border: none;
-      user-select: none;
-      transition: background-color 0.25s ease;
-      text-decoration: none;
-      display: inline-flex;
+
+    .turf-card {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-card);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 6px;
+      gap: 16px;
+      transition: var(--transition-fast);
     }
-    .contact-button:hover,
-    .contact-button:focus {
-      background-color: #00b8ff;
-      outline: none;
-      text-decoration: none;
+
+    .turf-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
     }
-    .contact-button i {
-      font-size: 14px;
+
+    .turf-info h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
     }
-    .more-bookings {
-      margin-top: 12px;
-      font-weight: 600;
-      font-size: 14px;
+
+    .turf-info p {
+      font-size: 13px;
       color: var(--text-muted);
-      user-select: none;
-      text-align: center;
     }
 
-    /* QUICK ACTIONS */
-    .quick-actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      user-select: none;
-    }
-    .quick-action {
-      background: var(--bg-tertiary, #262626);
-      border-radius: var(--radius-card);
-      padding: 32px 20px;
-      box-shadow: var(--shadow-default);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      cursor: pointer;
-      transition: box-shadow 0.25s ease, transform 0.25s ease;
-      text-align: center;
-      color: var(--text-primary);
+    .turf-status {
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 12px;
       font-weight: 700;
-      font-size: 16px;
-    }
-    .quick-action:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-6px);
-      color: var(--accent-primary);
-    }
-    .quick-action i {
-      font-size: 36px;
-      color: inherit;
+      text-transform: uppercase;
     }
 
-    /* SECOND ROW QUICK ACTIONS */
-    .quick-actions-row2 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 24px;
-      user-select: none;
-    }
-    .quick-action-row2 {
-      background: var(--bg-tertiary, #262626);
-      border-radius: var(--radius-card);
-      padding: 32px 20px;
-      box-shadow: var(--shadow-default);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      cursor: pointer;
-      transition: box-shadow 0.25s ease, transform 0.25s ease;
-      text-align: center;
-      color: var(--text-primary);
-      font-weight: 700;
-      font-size: 16px;
-    }
-    .quick-action-row2:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-6px);
-      color: var(--accent-primary);
-    }
-    .quick-action-row2 i {
-      font-size: 36px;
-      color: inherit;
+    .turf-status.pending {
+      background: rgba(255, 193, 7, 0.15);
+      color: #ffc107;
     }
 
-    /* RESPONSIVE */
+    .turf-status.approved {
+      background: rgba(74, 222, 128, 0.15);
+      color: var(--accent-green);
+    }
+
+    .turf-status.rejected {
+      background: rgba(255, 77, 77, 0.15);
+      color: #ff4d4d;
+    }
+
+    /* ============ RESPONSIVE ============ */
     @media (max-width: 960px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .page-wrapper {
+        flex-direction: column;
       }
-      .quick-actions,
-      .quick-actions-row2 {
-        grid-template-columns: repeat(2, 1fr);
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        position: static;
+        padding: 20px;
+        gap: 12px;
+      }
+
+      .sidebar-logout {
+        border-top: none;
+        width: auto;
+        margin-top: 0;
+        padding-top: 0;
+      }
+
+      .summary-cards {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
-    @media (max-width: 480px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-      .quick-actions,
-      .quick-actions-row2 {
+
+    @media (max-width: 640px) {
+      .summary-cards {
         grid-template-columns: 1fr;
       }
 
-      .dashboard-actions{
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin: 30px 0;
-}
-.dashboard-actions a{
-  text-decoration: none;
-}
+      .top-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .tab-nav {
+        overflow-x: auto;
+      }
     }
   </style>
 </head>
+
 <body>
-  <main class="container" role="main" aria-label="Owner Dashboard">
+  <div class="page-wrapper">
 
-    <section class="welcome-section" aria-label="Welcome message">
-      <p class="welcome">Welcome back, Rahul! 👋</p>
-      <p class="welcome-subtitle">Here's your turf performance overview</p>
-    </section>
-    <section class="dashboard-actions" aria-label="Owner dashboard actions">
-
-  <a href="addturf.html" class="btn-primary">
-    ➕ Add Turf
-  </a>
-
-  <a href="turfmanagement.html" class="btn-primary">
-    🏟️ Manage Turfs
-  </a>
-
-  <a href="slotmanagement.html" class="btn-primary">
-    ⏱️ Manage Slots
-  </a>
-
-</section>
-
-    <!-- Stats Cards -->
-    <section class="stats-grid" aria-label="Performance statistics">
-      <article class="stat-card" tabindex="0" aria-label="Total bookings: 124, up 12 percent">
-        <i class="fa-solid fa-chart-simple stat-icon" aria-hidden="true"></i>
-        <div class="stat-label">Total Bookings</div>
-        <div class="stat-value">124</div>
-        <div class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> ↑ 12%</div>
-      </article>
-      <article class="stat-card" tabindex="0" aria-label="Today's bookings: 8, 2 more than yesterday">
-        <i class="fa-regular fa-calendar-days stat-icon" aria-hidden="true"></i>
-        <div class="stat-label">Today's Bookings</div>
-        <div class="stat-value">8</div>
-        <div class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> ↑ 2 more</div>
-      </article>
-      <article class="stat-card" tabindex="0" aria-label="This month's revenue: 45,200 rupees, up 18 percent">
-        <i class="fa-solid fa-money-bill-wave stat-icon" aria-hidden="true"></i>
-        <div class="stat-label">This Month Revenue</div>
-        <div class="stat-value">₹45,200</div>
-        <div class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> ↑ 18%</div>
-      </article>
-      <article class="stat-card" tabindex="0" aria-label="Average rating: 4.8, up 0.2">
-        <i class="fa-solid fa-star stat-icon" aria-hidden="true"></i>
-        <div class="stat-label">Average Rating</div>
-        <div class="stat-value">4.8</div>
-        <div class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> ↑ 0.2</div>
-      </article>
-    </section>
-
-    <!-- Today's Schedule -->
-    <section class="schedule-section" aria-label="Today's schedule">
-      <div class="schedule-header">
-        <h2>📅 TODAY'S SCHEDULE</h2>
-        <a href="full-calendar.html" class="nav-link" aria-label="View full calendar">View Full Calendar</a>
+    <!-- ========== LEFT SIDEBAR ========== -->
+    <aside class="sidebar" aria-label="Profile sidebar">
+      <div class="sidebar-avatar">
+        {{ request.user.username|make_list|first|upper }}{{ request.user.username|make_list|last|upper }}
       </div>
-      <div class="schedule-list" tabindex="0" role="list">
-        <article class="booking-item" role="listitem" tabindex="0" aria-label="7:00 AM to 8:00 AM football booking by Rahul Sharma, contact +91 98765 43210, status confirmed">
-          <div class="booking-time">🕐 7:00 AM - 8:00 AM</div>
-          <div class="booking-details">
-            <div class="booking-player">Rahul Sharma</div>
-            <div class="booking-contact">
-              📱 +91 98765 43210
-              <a href="tel:+919876543210" class="contact-button" aria-label="Contact Rahul Sharma">
-                <i class="fa-solid fa-phone"></i> Contact
-              </a>
-            </div>
-            <div class="booking-status" style="font-weight:700; color: var(--accent-primary); user-select:none;">Status: CONFIRMED</div>
-          </div>
+      <div class="sidebar-name">{{ request.user.username }}</div>
+      <div class="sidebar-email">{{ request.user.email }}</div>
+      <span class="sidebar-role">{{ request.user.get_role_display }}</span>
+      <a href="#" class="sidebar-btn">
+        <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+      </a>
+
+      <div class="sidebar-logout">
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+          </button>
+        </form>
+      </div>
+    </aside>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-content" role="main" aria-label="Owner Dashboard">
+
+      <!-- Top Header -->
+      <div class="top-header">
+        <div class="top-header-left">
+          <h1>Owner Dashboard</h1>
+          <p>Manage your turfs, slots & bookings</p>
+        </div>
+        <div class="top-header-actions">
+          <a href="{% url 'add_turf' %}" class="btn-add-turf">
+            <i class="fa-solid fa-plus"></i> Add Turf
+          </a>
+          <button class="btn-menu" aria-label="More options">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Summary Cards -->
+      <section class="summary-cards" aria-label="Summary statistics">
+        <article class="summary-card">
+          <div class="card-value">{{ owner_turfs|length }}</div>
+          <div class="card-label">Total Turfs</div>
         </article>
-        <article class="booking-item" role="listitem" tabindex="0" aria-label="9:00 AM to 10:00 AM cricket booking by Priya Patel, contact +91 87654 32109, status confirmed">
-          <div class="booking-time">🕐 9:00 AM - 10:00 AM</div>
-          <div class="booking-details">
-            <div class="booking-player">Priya Patel</div>
-            <div class="booking-contact">
-              📱 +91 87654 32109
-              <a href="tel:+918765432109" class="contact-button" aria-label="Contact Priya Patel">
-                <i class="fa-solid fa-phone"></i> Contact
-              </a>
-            </div>
-            <div class="booking-status" style="font-weight:700; color: var(--accent-primary); user-select:none;">Status: CONFIRMED</div>
-          </div>
+        <article class="summary-card">
+          <div class="card-value">0</div>
+          <div class="card-label">Total Bookings</div>
         </article>
-        <article class="booking-item" role="listitem" tabindex="0" aria-label="5:00 PM to 6:00 PM football booking by Amit Kumar, contact +91 76543 21098, status confirmed">
-          <div class="booking-time">🕐 5:00 PM - 6:00 PM</div>
-          <div class="booking-details">
-            <div class="booking-player">Amit Kumar</div>
-            <div class="booking-contact">
-              📱 +91 76543 21098
-              <a href="tel:+917654321098" class="contact-button" aria-label="Contact Amit Kumar">
-                <i class="fa-solid fa-phone"></i> Contact
-              </a>
-            </div>
-            <div class="booking-status" style="font-weight:700; color: var(--accent-primary); user-select:none;">Status: CONFIRMED</div>
-          </div>
+        <article class="summary-card">
+          <div class="card-value">₹0</div>
+          <div class="card-label">Revenue</div>
         </article>
-      </div>
-      <p class="more-bookings" aria-live="polite" aria-atomic="true">+ 5 more bookings today</p>
-    </section>
+      </section>
 
-    <!-- Quick Actions -->
-    <section aria-label="Quick actions">
-      <div class="quick-actions">
-        <div class="quick-action" tabindex="0" role="button" aria-label="Manage Bookings">
-          <i class="fa-regular fa-calendar-check"></i>
-          <span>📅 Manage Bookings</span>
-        </div>
-        <a href="slotmanagement.html" class="quick-action" aria-label="Manage Slots">
-  <i class="fa-regular fa-clock"></i>
-  <span>🕐 Manage Slots</span>
-</a>
+      <!-- Tab Navigation -->
+      <nav class="tab-nav" role="tablist" aria-label="Dashboard sections">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="my-turfs"
+          onclick="switchTab('my-turfs', this)">
+          <i class="fa-solid fa-futbol"></i> My Turfs
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="recent-bookings"
+          onclick="switchTab('recent-bookings', this)">
+          <i class="fa-solid fa-calendar-check"></i> Recent Bookings
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="analytics"
+          onclick="switchTab('analytics', this)">
+          <i class="fa-solid fa-chart-simple"></i> Analytics
+        </button>
+      </nav>
 
-        <div class="quick-action" tabindex="0" role="button" aria-label="View Analytics">
-          <i class="fa-solid fa-chart-simple"></i>
-          <span>📊 View Analytics</span>
-        </div>
-      </div>
-      <div class="quick-actions-row2">
-        <div class="quick-action-row2" tabindex="0" role="button" aria-label="Edit Turf Info">
-          <i class="fa-solid fa-pen"></i>
-          <span>✏️ Edit Turf Info</span>
-        </div>
-        <div class="quick-action-row2" tabindex="0" role="button" aria-label="Pricing Settings">
-          <i class="fa-solid fa-money-bill-wave"></i>
-          <span>💰 Pricing Settings</span>
-        </div>
-        <div class="quick-action-row2" tabindex="0" role="button" aria-label="Update Gallery">
-          <i class="fa-solid fa-camera"></i>
-          <span>📸 Update Gallery</span>
-        </div>
-      </div>
-    </section>
+      <!-- Tab Content -->
+      <div class="tab-content">
 
-  </main>
+        <!-- My Turfs Panel -->
+        <div class="tab-panel active" id="my-turfs" role="tabpanel">
+          <div class="turf-list">
+            {% if owner_turfs %}
+            {% for turf in owner_turfs %}
+            <div class="turf-card">
+              <div class="turf-info">
+                <h3>{{ turf.name }}</h3>
+                <p><i class="fa-solid fa-location-dot"></i> {{ turf.city }}, {{ turf.state }}</p>
+              </div>
+              <div style="display:flex; align-items:center; gap:12px;">
+                {% if turf.status == 'rejected' %}
+                <a href="{% url 'edit_turf' turf.id %}"
+                  style="padding:6px 14px; background:var(--bg-tertiary); border:1px solid #404040; border-radius:8px; color:#fff; font-size:13px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:all 0.2s ease;"
+                  onmouseover="this.style.borderColor='var(--accent-primary)'; this.style.color='var(--accent-primary)';"
+                  onmouseout="this.style.borderColor='#404040'; this.style.color='#fff';">
+                  <i class="fa-solid fa-pen-to-square"></i> Edit
+                </a>
+                {% endif %}
+                <span class="turf-status {{ turf.status }}">{{ turf.status }}</span>
+                <span style="font-size:12px; color:var(--text-muted);">{{ turf.created_at|date:'d M Y' }}</span>
+              </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="empty-state">No turfs added yet. Click <strong>"+ Add Turf"</strong> to get started.</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Recent Bookings Panel -->
+        <div class="tab-panel" id="recent-bookings" role="tabpanel">
+          <div class="filter-bar">
+            <label for="booking-filter">Filter by:</label>
+            <select id="booking-filter">
+              <option value="all">All Time</option>
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+            </select>
+          </div>
+          <div class="booking-list">
+            <p class="empty-state">No bookings found</p>
+          </div>
+        </div>
+
+        <!-- Analytics Panel -->
+        <div class="tab-panel" id="analytics" role="tabpanel">
+          <p class="empty-state">Analytics will be available once you have active turfs and bookings.</p>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    function switchTab(tabId, btn) {
+      // Remove active from all tabs and panels
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+
+      // Activate clicked tab and matching panel
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
 </body>
+
 </html>

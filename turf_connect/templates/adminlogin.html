@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +9,9 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap"
+    rel="stylesheet" />
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -20,9 +23,11 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     html {
       scroll-behavior: smooth;
     }
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: #0D0D0D;
@@ -35,12 +40,14 @@
       padding: 20px;
       user-select: none;
     }
+
     a {
       color: var(--accent-primary);
       text-decoration: none;
       font-weight: 600;
       transition: color 0.2s ease;
     }
+
     a:hover,
     a:focus-visible,
     button:hover,
@@ -49,6 +56,7 @@
       outline: 2px solid #00D4FF;
       outline-offset: 3px;
     }
+
     ::selection {
       background: rgba(0, 212, 255, 0.22);
     }
@@ -87,6 +95,7 @@
       color: var(--accent-primary);
       user-select: text;
     }
+
     .subheader {
       text-align: center;
       font-weight: 600;
@@ -122,6 +131,7 @@
       transition: border-color 0.2s ease;
       width: 100%;
     }
+
     input[type="email"]:focus,
     input[type="password"]:focus {
       border-color: var(--accent-primary);
@@ -135,10 +145,12 @@
       display: flex;
       align-items: center;
     }
+
     .password-wrapper input {
       flex: 1;
       padding-right: 44px;
     }
+
     .toggle-password {
       position: absolute;
       right: 12px;
@@ -150,6 +162,7 @@
       background: none;
       border: none;
     }
+
     .toggle-password:hover,
     .toggle-password:focus {
       color: var(--accent-primary);
@@ -173,12 +186,14 @@
       align-items: center;
       gap: 12px;
     }
+
     button.login-btn:hover,
     button.login-btn:focus {
       box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
       transform: scale(1.05);
       outline: none;
     }
+
     button.login-btn:active {
       transform: scale(0.98);
     }
@@ -193,21 +208,33 @@
     }
   </style>
 </head>
+
 <body>
   <main class="container" role="main" aria-label="Admin login form">
     <h1 class="header">🏟️ BOOKMYTURF</h1>
     <p class="subheader">ADMIN PORTAL</p>
 
-    <form novalidate>
+    {% if messages %}
+    <div style="margin-bottom:8px;">
+      {% for message in messages %}
+      <p style="color:#ff4d4d; font-weight:600; font-size:14px; text-align:center;">{{ message }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'admin_login' %}">
+      {% csrf_token %}
       <div>
         <label for="admin-email">Admin Email</label>
-        <input id="admin-email" type="email" placeholder="📧 Enter admin email" autocomplete="email" required aria-required="true" />
+        <input id="admin-email" name="email" type="email" placeholder="📧 Enter admin email" autocomplete="email"
+          required aria-required="true" />
       </div>
 
       <div>
         <label for="admin-password">Password</label>
         <div class="password-wrapper">
-          <input id="admin-password" type="password" placeholder="🔒 Enter password" autocomplete="current-password" required aria-required="true" />
+          <input id="admin-password" name="password" type="password" placeholder="🔒 Enter password"
+            autocomplete="current-password" required aria-required="true" />
           <button type="button" class="toggle-password" aria-label="Toggle password visibility" tabindex="0">
             <i class="fa-regular fa-eye"></i>
           </button>
@@ -222,4 +249,5 @@
     <p class="footer-note">🔒 Secure access for authorized personnel only</p>
   </main>
 </body>
+
 </html>

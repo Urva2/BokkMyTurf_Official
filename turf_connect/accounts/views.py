@@ -59,3 +59,20 @@ def register_owner(request):
     else:
         form = OwnerRegistrationForm()
     return render(request, 'ownerregistration.html', {'form': form})
+
+
+def admin_login(request):
+    """Separate login page for admin users."""
+    if request.method == 'POST':
+        email = request.POST.get('email', '').strip()
+        password = request.POST.get('password', '')
+
+        user = authenticate(request, username=email, password=password)
+
+        if user is not None and user.role == 'admin':
+            login(request, user)
+            return redirect('admin_dashboard')
+        else:
+            messages.error(request, 'Invalid admin credentials.')
+
+    return render(request, 'adminlogin.html')

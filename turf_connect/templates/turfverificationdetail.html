@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +9,9 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap"
+    rel="stylesheet" />
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -20,9 +23,11 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     html {
       scroll-behavior: smooth;
     }
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: #0D0D0D;
@@ -35,17 +40,22 @@
       justify-content: center;
       align-items: flex-start;
     }
-    a, button, textarea {
+
+    a,
+    button,
+    textarea {
       font-family: inherit;
       font-size: 16px;
       color: inherit;
     }
+
     a {
       color: var(--accent-primary);
       text-decoration: none;
       font-weight: 600;
       transition: color 0.2s ease;
     }
+
     a:hover,
     a:focus-visible,
     button:hover,
@@ -54,6 +64,7 @@
       outline: 2px solid #00D4FF;
       outline-offset: 3px;
     }
+
     ::selection {
       background: rgba(0, 212, 255, 0.22);
     }
@@ -99,9 +110,11 @@
       width: fit-content;
       margin-bottom: 16px;
     }
+
     .back-link i {
       font-size: 14px;
     }
+
     .back-link:hover,
     .back-link:focus {
       color: #00D4FF;
@@ -119,6 +132,7 @@
       margin-bottom: 4px;
       text-align: center;
     }
+
     p.sub-title {
       font-weight: 600;
       font-size: 16px;
@@ -140,6 +154,7 @@
       box-shadow: 0 6px 20px rgba(0, 212, 255, 0.12);
       user-select: none;
     }
+
     section.owner-info h2,
     section.turf-details h2,
     section.submitted-images h2,
@@ -172,11 +187,13 @@
       user-select: text;
       word-break: break-word;
     }
+
     .turf-details-content a {
       color: var(--accent-primary);
       font-weight: 700;
       text-decoration: none;
     }
+
     .turf-details-content a:hover,
     .turf-details-content a:focus {
       text-decoration: underline;
@@ -190,6 +207,7 @@
       flex-wrap: wrap;
       user-select: none;
     }
+
     .image-card {
       width: 120px;
       height: 90px;
@@ -206,6 +224,7 @@
       user-select: none;
       position: relative;
     }
+
     .image-card:hover,
     .image-card:focus {
       box-shadow: 0 0 20px var(--accent-primary);
@@ -220,6 +239,7 @@
       color: var(--text-primary);
       user-select: none;
     }
+
     .doc-filename {
       font-weight: 400;
       font-size: 14px;
@@ -227,11 +247,13 @@
       margin-left: 12px;
       user-select: text;
     }
+
     .doc-actions {
       margin-top: 6px;
       display: flex;
       gap: 16px;
     }
+
     .doc-actions a {
       font-weight: 600;
       font-size: 14px;
@@ -243,14 +265,17 @@
       align-items: center;
       gap: 6px;
     }
+
     .doc-actions a:hover,
     .doc-actions a:focus {
       text-decoration: underline;
       outline: none;
     }
+
     .doc-actions i {
       font-size: 16px;
     }
+
     .doc-missing {
       font-weight: 600;
       font-size: 16px;
@@ -269,6 +294,7 @@
       margin-bottom: 8px;
       user-select: none;
     }
+
     textarea {
       width: 100%;
       min-height: 80px;
@@ -283,17 +309,20 @@
       transition: border-color 0.2s ease;
       font-weight: 500;
     }
+
     textarea:focus {
       border-color: var(--accent-primary);
       outline: none;
       box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
     }
+
     .action-buttons {
       margin-top: 24px;
       display: flex;
       gap: 24px;
       user-select: none;
     }
+
     .btn {
       flex: 1;
       padding: 16px 0;
@@ -311,33 +340,39 @@
       text-decoration: none;
       text-align: center;
     }
+
     .btn-reject {
       background-color: #FF4757;
       color: #000;
     }
+
     .btn-reject:hover,
     .btn-reject:focus {
       background-color: #ff6b6b;
       outline: none;
     }
+
     .btn-approve {
       background-color: var(--accent-primary);
       color: #000;
     }
+
     .btn-approve:hover,
     .btn-approve:focus {
       background-color: #00b8ff;
       outline: none;
     }
+
     .btn i {
       font-size: 20px;
     }
   </style>
 </head>
+
 <body>
   <main class="container" role="main" aria-label="Verification Review">
 
-    <a href="verification-panel.html" class="back-link" aria-label="Back to Verification Panel">
+    <a href="{% url 'admin_dashboard' %}" class="back-link" aria-label="Back to Verification Panel">
       <i class="fa-solid fa-arrow-left"></i> Back to Verification Panel
     </a>
 
@@ -364,8 +399,11 @@
       <div class="turf-details-content">
         <p><strong>Turf Name:</strong> Green Arena Sports Complex</p>
         <p><strong>Location:</strong><br />123, Sports Complex Road, Andheri West<br />Mumbai, Maharashtra - 400058</p>
-        <p><strong>Google Maps:</strong> <a href="https://maps.google.com/..." target="_blank" rel="noopener noreferrer">https://maps.google.com/...</a> <a href="https://maps.google.com/..." target="_blank" rel="noopener noreferrer" aria-label="View on map">🗺️ View on Map</a></p>
-        <p><strong>Description:</strong><br />Premium sports facility with FIFA-approved artificial turf, professional floodlights.</p>
+        <p><strong>Google Maps:</strong> <a href="https://maps.google.com/..." target="_blank"
+            rel="noopener noreferrer">https://maps.google.com/...</a> <a href="https://maps.google.com/..."
+            target="_blank" rel="noopener noreferrer" aria-label="View on map">🗺️ View on Map</a></p>
+        <p><strong>Description:</strong><br />Premium sports facility with FIFA-approved artificial turf, professional
+          floodlights.</p>
         <p><strong>Facilities:</strong> Parking, Floodlights, Washroom, Changing Room, Drinking Water, First Aid</p>
       </div>
     </section>
@@ -374,64 +412,111 @@
     <section class="submitted-images" aria-labelledby="submitted-images-title">
       <h2 id="submitted-images-title">📸 SUBMITTED IMAGES</h2>
       <div class="images-grid" role="list" aria-label="Submitted turf images">
-        <div class="image-card" role="listitem" tabindex="0" aria-label="Image 1, viewable">IMG 1 [View]</div>
-        <div class="image-card" role="listitem" tabindex="0" aria-label="Image 2, viewable">IMG 2 [View]</div>
-        <div class="image-card" role="listitem" tabindex="0" aria-label="Image 3, viewable">IMG 3 [View]</div>
-        <div class="image-card" role="listitem" tabindex="0" aria-label="Image 4, viewable">IMG 4 [View]</div>
-        <div class="image-card" role="listitem" tabindex="0" aria-label="Image 5, viewable">IMG 5 [View]</div>
+        {% if turf_images %}
+        {% for image in turf_images %}
+        <a href="{{ image.image.url }}" target="_blank" rel="noopener noreferrer" class="image-card" role="listitem"
+          tabindex="0" aria-label="Image {{ forloop.counter }}" style="overflow:hidden; text-decoration:none;">
+          <img src="{{ image.image.url }}" alt="Turf image {{ forloop.counter }}"
+            style="width:100%; height:100%; object-fit:cover; border-radius:var(--radius-card);" />
+        </a>
+        {% endfor %}
+        {% else %}
+        <p style="color:var(--text-muted); font-weight:600; font-size:15px;">No images submitted.</p>
+        {% endif %}
       </div>
     </section>
 
-    <!-- Verification Documents -->
     <section class="verification-docs" aria-labelledby="verification-docs-title">
       <h2 id="verification-docs-title">📄 VERIFICATION DOCUMENTS</h2>
+
+      {% if verification_documents %}
+
+      <!-- Identity Proof -->
       <div class="doc-item">
-        <span>✓ Identity Proof (Aadhaar Card)</span>
-        <span class="doc-filename">identity_proof_aadhaar.pdf</span>
+        <span>Identity Proof</span>
+        {% if verification_documents.identity_proof %}
+        <span class="doc-filename">{{ verification_documents.identity_proof.name }}</span>
         <div class="doc-actions">
-          <a href="#" aria-label="Download identity proof Aadhaar Card"><i class="fa-solid fa-download"></i> Download</a>
-          <a href="#" aria-label="Preview identity proof Aadhaar Card"><i class="fa-solid fa-eye"></i> Preview</a>
+          <a href="{{ verification_documents.identity_proof.url }}" target="_blank" rel="noopener noreferrer"
+            aria-label="Preview identity proof"><i class="fa-solid fa-eye"></i> Preview</a>
         </div>
+        {% else %}
+        <span class="doc-missing">Not Provided</span>
+        {% endif %}
       </div>
+
+      <!-- Ownership Agreement -->
       <div class="doc-item">
-        <span>✓ Turf Ownership Agreement</span>
-        <span class="doc-filename">ownership_agreement.pdf</span>
+        <span>Ownership Agreement</span>
+        {% if verification_documents.ownership_agreement %}
+        <span class="doc-filename">{{ verification_documents.ownership_agreement.name }}</span>
         <div class="doc-actions">
-          <a href="#" aria-label="Download turf ownership agreement"><i class="fa-solid fa-download"></i> Download</a>
-          <a href="#" aria-label="Preview turf ownership agreement"><i class="fa-solid fa-eye"></i> Preview</a>
+          <a href="{{ verification_documents.ownership_agreement.url }}" target="_blank" rel="noopener noreferrer"
+            aria-label="Preview ownership agreement"><i class="fa-solid fa-eye"></i> Preview</a>
         </div>
+        {% else %}
+        <span class="doc-missing">Not Provided</span>
+        {% endif %}
       </div>
+
+      <!-- Municipal Permission -->
       <div class="doc-item">
-        <span>✓ Municipal Permission Letter</span>
-        <span class="doc-filename">municipal_permission.pdf</span>
+        <span>Municipal Permission</span>
+        {% if verification_documents.municipal_permission %}
+        <span class="doc-filename">{{ verification_documents.municipal_permission.name }}</span>
         <div class="doc-actions">
-          <a href="#" aria-label="Download municipal permission letter"><i class="fa-solid fa-download"></i> Download</a>
-          <a href="#" aria-label="Preview municipal permission letter"><i class="fa-solid fa-eye"></i> Preview</a>
+          <a href="{{ verification_documents.municipal_permission.url }}" target="_blank" rel="noopener noreferrer"
+            aria-label="Preview municipal permission"><i class="fa-solid fa-eye"></i> Preview</a>
         </div>
+        {% else %}
+        <span class="doc-missing">Not Provided</span>
+        {% endif %}
       </div>
+
+      <!-- GST Certificate (Optional) -->
       <div class="doc-item">
-        <span>○ GST Certificate (Not Provided)</span>
+        <span>GST Certificate</span>
+        {% if verification_documents.gst_certificate %}
+        <span class="doc-filename">{{ verification_documents.gst_certificate.name }}</span>
+        <div class="doc-actions">
+          <a href="{{ verification_documents.gst_certificate.url }}" target="_blank" rel="noopener noreferrer"
+            aria-label="Preview GST certificate"><i class="fa-solid fa-eye"></i> Preview</a>
+        </div>
+        {% else %}
+        <span class="doc-missing">Not Provided</span>
+        {% endif %}
       </div>
+
+      {% else %}
+      <p class="doc-missing">No verification documents submitted.</p>
+      {% endif %}
     </section>
 
     <!-- Verification Action -->
     <section class="verification-action" aria-label="Verification action">
-      <label for="admin-notes">Admin Notes (Optional):</label>
-      <textarea id="admin-notes" name="admin-notes" placeholder="Add any internal notes here..." aria-multiline="true"></textarea>
+      <form method="post">
+        {% csrf_token %}
+        <label for="admin-notes">Admin Notes (Optional):</label>
+        <textarea id="admin-notes" name="admin_notes" placeholder="Add any internal notes here..."
+          aria-multiline="true"></textarea>
 
-      <label for="rejection-reason">Rejection Reason (Required if rejecting):</label>
-      <textarea id="rejection-reason" name="rejection-reason" placeholder="Explain why the turf is being rejected... This will be visible to the owner." aria-multiline="true"></textarea>
+        <label for="rejection-reason">Rejection Reason (Required if rejecting):</label>
+        <textarea id="rejection-reason" name="rejection_reason"
+          placeholder="Explain why the turf is being rejected... This will be visible to the owner."
+          aria-multiline="true"></textarea>
 
-      <div class="action-buttons">
-        <button type="button" class="btn btn-reject" aria-label="Reject turf">
-          <i class="fa-solid fa-xmark"></i> ✗ REJECT TURF
-        </button>
-        <button type="button" class="btn btn-approve" aria-label="Approve turf">
-          <i class="fa-solid fa-check"></i> ✓ APPROVE TURF
-        </button>
-      </div>
+        <div class="action-buttons">
+          <button type="submit" name="action" value="reject" class="btn btn-reject" aria-label="Reject turf">
+            <i class="fa-solid fa-xmark"></i> ✗ REJECT TURF
+          </button>
+          <button type="submit" name="action" value="approve" class="btn btn-approve" aria-label="Approve turf">
+            <i class="fa-solid fa-check"></i> ✓ APPROVE TURF
+          </button>
+        </div>
+      </form>
     </section>
 
   </main>
 </body>
+
 </html>

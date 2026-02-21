@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from bmt import views as bmt_views
 from accounts import views as accounts_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +32,10 @@ urlpatterns = [
     path('player/', bmt_views.player_home, name='player_dashboard'),
     path('owner/', bmt_views.owner_home, name='owner_dashboard'),
     path('admin-panel/', bmt_views.admin_dashboard, name='admin_dashboard'),
+    path('admin-portal/verification/<int:turf_id>/', bmt_views.admin_verify_turf, name='admin_verify_turf'),
+
+    # Turfs (turfs app)
+    path('turf/', include('turfs.urls')),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
