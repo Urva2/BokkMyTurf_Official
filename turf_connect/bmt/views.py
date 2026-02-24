@@ -9,11 +9,37 @@ from turfs.models import Turf, VerificationDocument, TurfImage
 User = get_user_model()
 
 
+def index(request):
+    """
+    Master entry point.
+    If not authenticated -> served home.html
+    If authenticated -> serve player_home.html or owner_home.html mapping
+    """
+    if not request.user.is_authenticated:
+        return render(request, 'home.html')
+    else:
+        role = getattr(request.user, 'role', None)
+        if role == 'admin':
+            return redirect('admin_dashboard')
+        elif role == 'owner':
+            return render(request, 'owner_home.html')
+        else:
+            # Default to player view
+            return render(request, 'player_home.html')
+
+
 @login_required(login_url='login')
 def player_home(request):
     if request.user.role != 'player':
         return HttpResponseForbidden("Access denied.")
     return render(request, 'playerdashboard.html')
+
+
+@login_required(login_url='login')
+def player_booking_history(request):
+    if request.user.role != 'player':
+        return HttpResponseForbidden("Access denied.")
+    return render(request, 'bookinghistorypage.html')
 
 
 @login_required(login_url='login')
@@ -27,6 +53,13 @@ def owner_home(request):
         'owner_turfs': owner_turfs,
     }
     return render(request, 'ownerdashboard.html', context)
+
+
+@login_required(login_url='login')
+def owner_slot_management(request):
+    if request.user.role != 'owner':
+        return HttpResponseForbidden("Access denied.")
+    return render(request, 'slotmanagement.html')
 
 
 @login_required(login_url='login')

@@ -21,10 +21,8 @@ def login_view(request):
             login(request, user)
             if user.role == User.Role.ADMIN:
                 return redirect('admin_dashboard')
-            elif user.role == User.Role.OWNER:
-                return redirect('owner_dashboard')
             else:
-                return redirect('player_dashboard')
+                return redirect('home')
         else:
             messages.error(request, 'Invalid email or password.')
 
@@ -34,7 +32,7 @@ def login_view(request):
 @require_POST
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('home')
 
 
 def register_player(request):

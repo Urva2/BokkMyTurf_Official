@@ -3,308 +3,338 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BookMyTurf – Find & Book Premium Sports Turfs</title>
-  <meta name="description"
-    content="BookMyTurf is India's premier platform to discover and book premium sports turfs near you. Real-time availability, instant booking." />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookMyTurf | Player Home</title>
+    <meta name="description"
+        content="BookMyTurf is India's premier platform to discover and book premium sports turfs near you. Real-time availability, instant booking." />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <style>
-    :root {
-      --bg-dark: #1a1a1a;
-      /* dark charcoal */
-      --bg-card: #242424;
-      /* slightly lighter charcoal */
-      --bg-card2: #2e2e2e;
-      --accent: #00bcd4;
-      /* cyan-blue */
-      --accent-dark: #0097a7;
-      --accent-glow: rgba(0, 188, 212, 0.25);
-      --text-white: #ffffff;
-      --text-muted: #a0a0a0;
-      --text-sub: #cccccc;
-      --border: rgba(0, 188, 212, 0.2);
-    }
+    <style>
+        :root {
+            --bg-dark: #1a1a1a;
+            /* dark charcoal */
+            --bg-card: #242424;
+            /* slightly lighter charcoal */
+            --bg-card2: #2e2e2e;
+            --accent: #00bcd4;
+            /* cyan-blue */
+            --accent-dark: #0097a7;
+            --accent-glow: rgba(0, 188, 212, 0.25);
+            --text-white: #ffffff;
+            --text-muted: #a0a0a0;
+            --text-sub: #cccccc;
+            --border: rgba(0, 188, 212, 0.2);
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    html {
-      scroll-behavior: smooth;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-white);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    /* ===================== NAVBAR ===================== */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 60px;
-      background: rgba(26, 26, 26, 0.85);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
+        /* ===================== NAVBAR ===================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 60px;
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
 
-    .site-title {
-      font-size: 22px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text-white);
-      letter-spacing: -0.3px;
-    }
+        .site-title {
+            font-size: 22px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-white);
+            letter-spacing: -0.3px;
+        }
 
-    .site-title .logo-icon {
-      width: 34px;
-      height: 34px;
-      background: var(--accent);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: #000;
-      flex-shrink: 0;
-    }
+        .site-title .logo-icon {
+            width: 34px;
+            height: 34px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #000;
+            flex-shrink: 0;
+        }
 
-    .site-title span.accent {
-      color: var(--accent);
-    }
+        .site-title span.accent {
+            color: var(--accent);
+        }
 
-    nav.nav-links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      font-size: 15px;
-    }
+        nav.nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            font-size: 15px;
+        }
 
-    nav.nav-links a {
-      color: var(--text-sub);
-      text-decoration: none;
-      font-weight: 500;
-      position: relative;
-      display: inline-block;
-      transition: color 0.25s, letter-spacing 0.25s;
-    }
+        nav.nav-links a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+            transition: color 0.25s, letter-spacing 0.25s;
+        }
 
-    /* underline sweep */
-    nav.nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: width 0.3s ease;
-    }
+        /* underline sweep */
+        nav.nav-links a.underline-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
 
-    nav.nav-links a:hover::after,
-    nav.nav-links a.active::after {
-      width: 100%;
-    }
+        nav.nav-links a.underline-link:hover::after,
+        nav.nav-links a.underline-link.active::after {
+            width: 100%;
+        }
 
-    nav.nav-links a:hover,
-    nav.nav-links a.active {
-      color: var(--text-white);
-      letter-spacing: 0.5px;
-    }
+        nav.nav-links a.underline-link:hover,
+        nav.nav-links a.underline-link.active {
+            color: var(--text-white);
+            letter-spacing: 0.5px;
+        }
 
-    /* keep buttons from inheriting the underline/grow */
-    nav.nav-links a.btn-outline::after,
-    nav.nav-links a.btn-filled-nav::after { display: none; }
-    nav.nav-links a.btn-outline:hover,
-    nav.nav-links a.btn-filled-nav:hover { letter-spacing: normal; }
+        .profile-icon {
+            font-size: 24px;
+            color: var(--text-sub) !important;
+            transition: color 0.25s, transform 0.2s;
+            display: flex;
+            align-items: center;
+        }
 
-    .btn-outline {
-      padding: 9px 22px;
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
-      color: var(--text-white) !important;
-      transition: border-color 0.25s, background 0.25s;
-    }
+        .profile-icon:hover {
+            color: var(--accent) !important;
+            transform: scale(1.1);
+        }
 
-    .btn-outline:hover {
-      border-color: var(--accent);
-      background: var(--accent-glow);
-    }
+        /* ===================== HERO ===================== */
+        .hero {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 140px 60px 80px;
+        }
 
-    .btn-filled-nav {
-      padding: 9px 22px;
-      border-radius: 6px;
-      background: var(--accent);
-      color: #000 !important;
-      font-weight: 700;
-      text-decoration: none;
-      transition: background 0.25s, transform 0.2s;
-    }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(0, 0, 0, 0.80) 40%, rgba(0, 188, 212, 0.08) 100%),
+                url('https://images.unsplash.com/photo-1574629810360-7efbb4d284a2?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            z-index: 0;
+        }
 
-    .btn-filled-nav:hover {
-      background: var(--accent-dark);
-      transform: translateY(-1px);
-    }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
 
-    /* ===================== HERO ===================== */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      padding: 140px 60px 80px;
-    }
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 188, 212, 0.12);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
 
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(135deg, rgba(0,0,0,0.80) 40%, rgba(0,188,212,0.08) 100%),
-        url('https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
-      z-index: 0;
-    }
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
 
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
-    }
+        .hero h1 .accent {
+            color: var(--accent);
+        }
 
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(0, 188, 212, 0.12);
-      border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 100px;
-      font-size: 13px;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 28px;
-      letter-spacing: 0.5px;
-    }
+        .hero p {
+            font-size: 18px;
+            color: var(--text-sub);
+            line-height: 1.7;
+            margin-bottom: 42px;
+            max-width: 520px;
+        }
 
-    .hero h1 {
-      font-size: 76px;
-      font-weight: 900;
-      line-height: 1.0;
-      letter-spacing: -2px;
-      margin-bottom: 24px;
-      text-transform: uppercase;
-    }
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
 
-    .hero h1 .accent {
-      color: var(--accent);
-    }
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            font-size: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+        }
 
-    .hero p {
-      font-size: 18px;
-      color: var(--text-sub);
-      line-height: 1.7;
-      margin-bottom: 42px;
-      max-width: 520px;
-    }
+        .cta-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
 
-    .hero-actions {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+        /* ===================== FOOTER ===================== */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 50px 60px 30px;
+            margin-top: auto;
+        }
 
-    .cta-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 36px;
-      background: var(--accent);
-      color: #000;
-      font-weight: 700;
-      font-size: 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
-    }
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 36px;
+        }
 
-    .cta-primary:hover {
-      background: var(--accent-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px var(--accent-glow);
-    }
+        .footer-brand .site-title {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
 
-    .cta-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 36px;
-      border: 1.5px solid var(--border);
-      color: var(--text-white);
-      font-weight: 600;
-      font-size: 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: border-color 0.25s, background 0.25s;
-    }
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 280px;
+            line-height: 1.7;
+        }
 
-    .cta-secondary:hover {
-      border-color: var(--accent);
-      background: var(--accent-glow);
-    }
+        .footer-links-group {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-muted);
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      animation: bounce 2s infinite;
-    }
+        .footer-col h4 {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
 
-    @keyframes bounce {
+        .footer-col a {
+            display: block;
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: color 0.25s;
+        }
 
-      0%,
-      100% {
-        transform: translateX(-50%) translateY(0);
-      }
+        .footer-col a:hover {
+            color: var(--accent);
+        }
 
-      50% {
-        transform: translateX(-50%) translateY(8px);
-      }
-    }
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
 
-    /* ===================== SECTION BASE ===================== */
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            background: var(--bg-card2);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 15px;
+            text-decoration: none;
+            transition: border-color 0.25s, color 0.25s, transform 0.25s;
+        }
+
+        .social-links a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ===================== SECTION BASE ===================== */
     section {
       padding: 90px 60px;
     }
@@ -774,102 +804,68 @@
     }
 
     /* ===================== RESPONSIVE ===================== */
-    @media (max-width: 1024px) {
-      .turfs-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 20px;
+            }
 
-      .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+            .hero {
+                padding: 120px 20px 60px;
+            }
 
-      .why-mission {
-        grid-template-columns: 1fr;
-      }
-    }
+            .hero h1 {
+                font-size: 48px;
+            }
 
-    @media (max-width: 768px) {
-      header {
-        padding: 16px 20px;
-      }
+            footer {
+                padding: 40px 20px 20px;
+            }
 
-      .hero {
-        padding: 120px 20px 60px;
-      }
-
-      .hero h1 {
-        font-size: 48px;
-      }
-
-      section {
-        padding: 60px 20px;
-      }
-
-      .steps-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .turfs-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      footer {
-        padding: 40px 20px 20px;
-      }
-
-      nav.nav-links {
-        gap: 14px;
-        font-size: 14px;
-      }
-    }
-  </style>
+            nav.nav-links {
+                gap: 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- =================== HEADER =================== -->
-  <header>
-    <a href="{% url 'home' %}" class="site-title">
-      <span class="logo-icon"><i class="fa-solid fa-futbol"></i></span>
-      Book<span class="accent">My</span>Turf
-    </a>
-    <nav class="nav-links">
-      <a href="{% url 'home' %}" class="active">Home</a>
-      <a href="{% url 'browse_turfs' %}">Browse Turfs</a>
-      <a href="{% url 'login' %}" class="btn-outline">Login</a>
-      <a href="{% url 'register_player' %}" class="btn-filled-nav">Sign Up</a>
-    </nav>
-  </header>
-
-  <!-- =================== HERO =================== -->
-  <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <div class="hero-tag">
-        <i class="fa-solid fa-circle-check"></i>
-        India's #1 Turf Booking Platform
-      </div>
-      <h1>BOOK YOUR <span class="accent">TURF</span></h1>
-      <p>Play more. Wait less. Find nearby turfs, check availability, and book your slot in seconds.</p>
-      <div class="hero-actions">
-        <a href="{% url 'browse_turfs' %}" class="cta-primary">
-          <i class="fa-solid fa-magnifying-glass"></i> Explore Turfs
+    <!-- =================== HEADER =================== -->
+    <header>
+        <a href="{% url 'player_dashboard' %}" class="site-title">
+            <span class="logo-icon"><i class="fa-solid fa-futbol"></i></span>
+            Book<span class="accent">My</span>Turf
         </a>
-        <a href="{% url 'register_player' %}" class="cta-secondary">
-          <i class="fa-solid fa-user-plus"></i> Get Started
-        </a>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
-  </section>
+        <nav class="nav-links">
+            <a href="{% url 'player_dashboard' %}" class="underline-link active">Home</a>
+            <a href="{% url 'browse_turfs' %}" class="underline-link">Browse Turfs</a>
+            <a href="{% url 'player_dashboard' %}" class="profile-icon" aria-label="Dashboard">
+                <i class="fa-solid fa-circle-user"></i>
+            </a>
+        </nav>
+    </header>
 
-  <!-- =================== FEATURED TURFS =================== -->
+    <!-- =================== HERO =================== -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-tag">
+                <i class="fa-solid fa-bolt"></i>
+                Player Portal
+            </div>
+            <h1>WELCOME BACK TO <br><span class="accent">BOOKMYTURF</span></h1>
+            <p>Ready for your next game? Browse and book premium sports facilities in your community instantly. Manage
+                your bookings gracefully from your elegant dashboard.</p>
+            <div class="hero-actions">
+                <a href="{% url 'browse_turfs' %}" class="cta-primary">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search Turfs
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================== FEATURED TURFS =================== -->
   <section class="featured" id="featured">
     <div class="featured-header">
       <div>
@@ -1016,50 +1012,50 @@
   </section>
 
   <!-- =================== FOOTER =================== -->
-  <footer>
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="{% url 'home' %}" class="site-title">
-          <span class="logo-icon"><i class="fa-solid fa-futbol"></i></span>
-          Book<span class="accent">My</span>Turf
-        </a>
-        <p>India's premier platform for booking premium sports turfs near you.</p>
-      </div>
-      <div class="footer-links-group">
-        <div class="footer-col">
-          <h4>Navigate</h4>
-          <a href="{% url 'home' %}">Home</a>
-          <a href="{% url 'browse_turfs' %}">Browse Turfs</a>
-          <a href="#">About</a>
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="{% url 'player_dashboard' %}" class="site-title">
+                    <span class="logo-icon"><i class="fa-solid fa-futbol"></i></span>
+                    Book<span class="accent">My</span>Turf
+                </a>
+                <p>India's premier platform to discover and book premium sports turfs near you.</p>
+            </div>
+            <div class="footer-links-group">
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <a href="{% url 'player_dashboard' %}">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">News</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="{% url 'player_dashboard' %}">Dashboard</a>
+                    <a href="{% url 'browse_turfs' %}">Browse</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Our Team</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="footer-col">
-          <h4>Account</h4>
-          <a href="{% url 'login' %}">Login</a>
-          <a href="{% url 'register_player' %}">Sign Up</a>
+        <div class="footer-bottom">
+            <p>&copy; 2026 BookMyTurf. All rights reserved.</p>
+            <p>Made with <i class="fa-solid fa-heart" style="color:var(--accent);"></i> for sports lovers</p>
         </div>
-        <div class="footer-col">
-          <h4>Contact Us</h4>
-          <a href="#">Help Center</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Cookie Policy</a>
-        </div>
-        <div class="footer-col">
-          <h4>Follow Us</h4>
-          <div class="social-links">
-            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 BookMyTurf. All rights reserved.</p>
-      <p>Made with <i class="fa-solid fa-heart" style="color:var(--accent);"></i> for sports lovers</p>
-    </div>
-  </footer>
+    </footer>
 
 </body>
 

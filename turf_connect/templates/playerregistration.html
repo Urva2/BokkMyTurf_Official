@@ -341,6 +341,123 @@
       background: #ff4d4d;
     }
   </style>
+
+  <!-- AUTO-INJECTED THEME OVERRIDE (MODERN DARK) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* VARIABLES REDEFINITION */
+    :root {
+      --bg-dark: #1a1a1a !important;
+      --bg-card: #242424 !important;
+      --bg-card2: #2e2e2e !important;
+      --accent: #00bcd4 !important;
+      --accent-dark: #0097a7 !important;
+      --text-white: #ffffff !important;
+      --text-muted: #a0a0a0 !important;
+      --text-sub: #cccccc !important;
+      --border: rgba(0, 188, 212, 0.2) !important;
+
+      /* Mapping legacy variables */
+      --bg-color: var(--bg-dark) !important;
+      --text-primary: var(--text-white) !important;
+      --text-secondary: var(--text-sub) !important;
+      --border-color: var(--border) !important;
+      
+      --text-color: var(--text-white) !important;
+      --accent-primary: var(--accent) !important;
+      --bg-secondary: #242424 !important;
+      --bg-tertiary: #2e2e2e !important;
+      --primary: var(--accent) !important;
+      --primary-hover: var(--accent-dark) !important;
+      --text-main: var(--text-white) !important;
+      --bg-footer: #1a1a1a !important;
+    }
+
+    /* TYPOGRAPHY & BODY */
+    body, p, h1, h2, h3, h4, h5, h6, a, span, div, td, th, label, input, select, textarea, button {
+      font-family: 'Inter', sans-serif !important;
+    }
+    body {
+      background-color: var(--bg-dark) !important;
+      color: var(--text-white) !important;
+    }
+    
+    /* INVERTED HEADERS, FOOTERS & SIDEBARS */
+    header, footer, .sidebar, .page-header, .top-header, .nav-left, .nav-right, .nav-center, .navbar {
+      background-color: rgba(26, 26, 26, 0.85) !important;
+      backdrop-filter: blur(14px) !important;
+      color: var(--text-white) !important;
+      border-color: var(--border) !important;
+    }
+    header a, footer a, .sidebar a, .page-header h1, .sidebar-name, .sidebar-email, .top-header-left h1, .navbar a, .navbar i, .navbar span {
+      color: var(--text-white) !important;
+    }
+    
+    /* CARDS & CONTAINERS */
+    .summary-card, .tab-content, .booking-item, .turf-card, .pending-section, .auth-card, .glass-card, .dashboard-card, .admin-card {
+      background-color: var(--bg-card) !important;
+      border: 1px solid var(--border) !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+    }
+    .summary-card-value, .card-value, .turf-name-cell, .auth-card h2, h1, h2, h3, .booking-player, .turf-info h3 {
+      color: var(--text-white) !important;
+    }
+    
+    /* INPUTS & FORMS */
+    input, select, textarea {
+      background-color: var(--bg-dark) !important;
+      color: var(--text-white) !important;
+      border: 1px solid var(--border) !important;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent) !important;
+      outline: none !important;
+    }
+    
+    /* BUTTONS */
+    .btn, .btn-primary, .btn-add-turf, .btn-login, .btn-signup, .primary-cta, .submit-btn, .view-details-btn, .action-btn {
+      background-color: var(--accent) !important;
+      color: #000 !important;
+      border: none !important;
+      font-weight: 700 !important;
+    }
+    .btn:hover, .btn-primary:hover, .btn-add-turf:hover, .primary-cta:hover, .submit-btn:hover, .view-details-btn:hover, .action-btn:hover {
+      background-color: var(--accent-dark) !important;
+      color: #000 !important;
+    }
+    
+    /* TABLES */
+    table thead th {
+      color: var(--accent) !important;
+      border-bottom-color: var(--border) !important;
+    }
+    table tbody td, .pending-table tbody tr {
+      border-bottom-color: rgba(255,255,255,0.1) !important;
+      color: var(--text-sub) !important;
+    }
+    .pending-table tbody tr:hover {
+       background-color: var(--bg-card2) !important;
+    }
+    
+    /* MISC RESETS */
+    .text-muted, .date-cell, .owner-name-cell, .city-cell, .booking-contact {
+       color: var(--text-muted) !important;
+    }
+    .tab-btn {
+       color: var(--text-sub) !important;
+    }
+    .tab-btn.active {
+       color: var(--accent) !important;
+       border-bottom-color: var(--accent) !important;
+    }
+    .sidebar-btn {
+       background-color: var(--bg-card2) !important;
+       color: var(--text-white) !important;
+       border-color: var(--border) !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -371,26 +488,26 @@
       <!-- {{ form.as_p }} -->
       <div>
         <label for="fullname"> Name *</label>
-        <input id="fullname" name="username" type="text" placeholder="👤 Enter username (no spaces)" autocomplete="name"
+        <input id="fullname" name="username" type="text" placeholder="Enter username (no spaces)" autocomplete="name"
           required aria-required="true" />
       </div>
 
       <div>
         <label for="email">Email Address *</label>
-        <input id="email" name="email" type="email" placeholder="📧 Enter your email" autocomplete="email" required
+        <input id="email" name="email" type="email" placeholder="Enter your email" autocomplete="email" required
           aria-required="true" />
       </div>
 
       <div>
         <label for="phone">Phone Number *</label>
-        <input id="phone" name="phone" type="tel" placeholder="📱 +91 | Enter your phone number" autocomplete="tel"
+        <input id="phone" name="phone" type="tel" placeholder="+91 | Enter your phone number" autocomplete="tel"
           pattern="[0-9]{10,15}" required aria-required="true" />
       </div>
 
       <div>
         <label for="password">Password *</label>
         <div class="password-wrapper">
-          <input id="password" name="password1" type="password" placeholder="🔒 Create a strong password"
+          <input id="password" name="password1" type="password" placeholder="Create a strong password"
             autocomplete="new-password" required aria-required="true" />
           <button type="button" class="toggle-password" aria-label="Toggle password visibility" tabindex="0">
             <i class="fa-regular fa-eye"></i>
@@ -401,7 +518,7 @@
 
       <div>
         <label for="confirm-password">Confirm Password *</label>
-        <input id="confirm-password" name="password2" type="password" placeholder="🔒 Confirm your password"
+        <input id="confirm-password" name="password2" type="password" placeholder="Confirm your password"
           autocomplete="new-password" required aria-required="true" />
       </div>
 

@@ -1,104 +1,196 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BookMyTurf | Player Dashboard</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap"
-        rel="stylesheet" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Dashboard</title>
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0D0D0D;
-            color: #FFFFFF;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+  <style>
+    :root {
+      --bg-dark: #1a1a1a;
+      --bg-card: #242424;
+      --bg-card2: #2e2e2e;
+      --accent: #00bcd4;
+      --accent-dark: #0097a7;
+      --accent-glow: rgba(0, 188, 212, 0.25);
+      --text-white: #ffffff;
+      --text-muted: #a0a0a0;
+      --text-sub: #cccccc;
+      --border: rgba(0, 188, 212, 0.2);
+    }
 
-        .dashboard-header h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 28px;
-            color: #00D4FF;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-        .dashboard-header p {
-            color: #999;
-            margin-top: 8px;
-        }
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 50px;
+      border-bottom: 1px solid var(--border);
+      background-color: var(--bg-card);
+    }
 
-        .welcome-card {
-            background: #1A1A1A;
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 8px 40px rgba(0, 212, 255, 0.1);
-        }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
 
-        .welcome-card h2 {
-            font-size: 22px;
-            margin-bottom: 12px;
-        }
+    header h1 .accent {
+      color: var(--accent);
+    }
 
-        .welcome-card p {
-            color: #999;
-            margin-bottom: 24px;
-        }
+    .logout-btn {
+      background-color: var(--accent);
+      color: #000;
+      border: none;
+      padding: 12px 28px;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.25s, transform 0.2s;
+    }
 
-        .logout-btn {
-            background: #00D4FF;
-            color: #000;
-            font-weight: 700;
-            font-size: 16px;
-            padding: 12px 32px;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
+    .logout-btn:hover {
+      background-color: var(--accent-dark);
+      transform: translateY(-2px);
+    }
 
-        .logout-btn:hover {
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-            transform: scale(1.05);
-        }
-    </style>
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .welcome-message {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      margin-bottom: 40px;
+      color: var(--text-sub);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .action-btn {
+      background-color: var(--bg-card2);
+      color: var(--text-white);
+      border: 1.5px solid var(--border);
+      padding: 16px 36px;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.25s, background-color 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .action-btn:hover {
+      border-color: var(--accent);
+      background-color: var(--accent-glow);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+      background-color: var(--bg-card);
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="dashboard-header">
-        <h1>🏟️ BOOKMYTURF</h1>
-        <p>Player Dashboard</p>
+
+  <!-- ========== HEADER : PLAYER PROFILE BAR ========== -->
+  <header>
+    <div>
+      <h1>Player <span class="accent">Dashboard</span></h1>
+      <p style="margin: 6px 0 0; font-size: 15px; color: var(--text-sub);">
+        Welcome back, {{ user.username }}
+      </p>
     </div>
 
-    <div class="welcome-card">
-        <h2>Welcome, {{ user.username }}! 👋</h2>
-        <p>You're logged in as <strong>{{ user.email }}</strong></p>
-        <p style="color: #00D4FF; font-weight: 600;">Role: Player</p>
-        <br>
-        <form method="post" action="{% url 'logout' %}" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit" class="logout-btn">LOGOUT</button>
-        </form>
-    </div>
+    <form method="post" action="{% url 'logout' %}" style="margin: 0;">
+      {% csrf_token %}
+      <button type="submit" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </form>
+  </header>
+
+  <!-- ========== MAIN DASHBOARD CONTENT ========== -->
+  <main>
+
+    <!-- Dashboard Card -->
+    <section style="max-width: 720px; width: 100%;">
+
+      <div class="welcome-message">
+        Hello, {{ user.username }}!
+      </div>
+
+      <div class="subtitle" style="margin-left: auto; margin-right: auto;">
+        Track your bookings, explore verified turfs, and manage your play schedule elegantly.
+      </div>
+
+      <!-- Action Area -->
+      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+
+        <a href="{% url 'booking_history' %}" class="action-btn">
+          <i class="fa-solid fa-clock-rotate-left"></i> Booking History
+        </a>
+
+        <a href="{% url 'browse_turfs' %}" class="action-btn">
+          <i class="fa-solid fa-magnifying-glass"></i> Browse Turfs
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <p>&copy; 2026 BookMyTurf. All rights reserved.</p>
+  </footer>
+
 </body>
 
 </html>

@@ -555,23 +555,150 @@
       }
     }
   </style>
+
+  <!-- AUTO-INJECTED THEME OVERRIDE (MODERN DARK) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* VARIABLES REDEFINITION */
+    :root {
+      --bg-dark: #1a1a1a !important;
+      --bg-card: #242424 !important;
+      --bg-card2: #2e2e2e !important;
+      --accent: #00bcd4 !important;
+      --accent-dark: #0097a7 !important;
+      --text-white: #ffffff !important;
+      --text-muted: #a0a0a0 !important;
+      --text-sub: #cccccc !important;
+      --border: rgba(0, 188, 212, 0.2) !important;
+
+      /* Mapping legacy variables */
+      --bg-color: var(--bg-dark) !important;
+      --text-primary: var(--text-white) !important;
+      --text-secondary: var(--text-sub) !important;
+      --border-color: var(--border) !important;
+      
+      --text-color: var(--text-white) !important;
+      --accent-primary: var(--accent) !important;
+      --bg-secondary: #242424 !important;
+      --bg-tertiary: #2e2e2e !important;
+      --primary: var(--accent) !important;
+      --primary-hover: var(--accent-dark) !important;
+      --text-main: var(--text-white) !important;
+      --bg-footer: #1a1a1a !important;
+    }
+
+    /* TYPOGRAPHY & BODY */
+    body, p, h1, h2, h3, h4, h5, h6, a, span, div, td, th, label, input, select, textarea, button {
+      font-family: 'Inter', sans-serif !important;
+    }
+    body {
+      background-color: var(--bg-dark) !important;
+      color: var(--text-white) !important;
+    }
+    
+    /* INVERTED HEADERS, FOOTERS & SIDEBARS */
+    header, footer, .sidebar, .page-header, .top-header, .nav-left, .nav-right, .nav-center, .navbar {
+      background-color: rgba(26, 26, 26, 0.85) !important;
+      backdrop-filter: blur(14px) !important;
+      color: var(--text-white) !important;
+      border-color: var(--border) !important;
+    }
+    header a, footer a, .sidebar a, .page-header h1, .sidebar-name, .sidebar-email, .top-header-left h1, .navbar a, .navbar i, .navbar span {
+      color: var(--text-white) !important;
+    }
+    
+    /* CARDS & CONTAINERS */
+    .summary-card, .tab-content, .booking-item, .turf-card, .pending-section, .auth-card, .glass-card, .dashboard-card, .admin-card {
+      background-color: var(--bg-card) !important;
+      border: 1px solid var(--border) !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+    }
+    .summary-card-value, .card-value, .turf-name-cell, .auth-card h2, h1, h2, h3, .booking-player, .turf-info h3 {
+      color: var(--text-white) !important;
+    }
+    
+    /* INPUTS & FORMS */
+    input, select, textarea {
+      background-color: var(--bg-dark) !important;
+      color: var(--text-white) !important;
+      border: 1px solid var(--border) !important;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent) !important;
+      outline: none !important;
+    }
+    
+    /* BUTTONS */
+    .btn, .btn-primary, .btn-add-turf, .btn-login, .btn-signup, .primary-cta, .submit-btn, .view-details-btn, .action-btn {
+      background-color: var(--accent) !important;
+      color: #000 !important;
+      border: none !important;
+      font-weight: 700 !important;
+    }
+    .btn:hover, .btn-primary:hover, .btn-add-turf:hover, .primary-cta:hover, .submit-btn:hover, .view-details-btn:hover, .action-btn:hover {
+      background-color: var(--accent-dark) !important;
+      color: #000 !important;
+    }
+    
+    /* TABLES */
+    table thead th {
+      color: var(--accent) !important;
+      border-bottom-color: var(--border) !important;
+    }
+    table tbody td, .pending-table tbody tr {
+      border-bottom-color: rgba(255,255,255,0.1) !important;
+      color: var(--text-sub) !important;
+    }
+    .pending-table tbody tr:hover {
+       background-color: var(--bg-card2) !important;
+    }
+    
+    /* MISC RESETS */
+    .text-muted, .date-cell, .owner-name-cell, .city-cell, .booking-contact {
+       color: var(--text-muted) !important;
+    }
+    .tab-btn {
+       color: var(--text-sub) !important;
+    }
+    .tab-btn.active {
+       color: var(--accent) !important;
+       border-bottom-color: var(--accent) !important;
+    }
+    .sidebar-btn {
+       background-color: var(--bg-card2) !important;
+       color: var(--text-white) !important;
+       border-color: var(--border) !important;
+    }
+  </style>
 </head>
 
 <body>
   <div class="page-wrapper">
 
-    <!-- ========== LEFT SIDEBAR ========== -->
+    <!-- ========== SIDEBAR : PROFILE CARD ========== -->
     <aside class="sidebar" aria-label="Profile sidebar">
+
+      <!-- Profile Identity -->
       <div class="sidebar-avatar">
         {{ request.user.username|make_list|first|upper }}{{ request.user.username|make_list|last|upper }}
       </div>
+
       <div class="sidebar-name">{{ request.user.username }}</div>
       <div class="sidebar-email">{{ request.user.email }}</div>
       <span class="sidebar-role">{{ request.user.get_role_display }}</span>
+
+      <!-- Profile Actions -->
+      <a href="#" class="sidebar-btn">
+        <i class="fa-solid fa-user"></i> View Profile
+      </a>
+
       <a href="#" class="sidebar-btn">
         <i class="fa-solid fa-pen-to-square"></i> Edit Profile
       </a>
 
+      <!-- Logout -->
       <div class="sidebar-logout">
         <form method="post" action="{% url 'logout' %}">
           {% csrf_token %}
@@ -580,133 +707,102 @@
           </button>
         </form>
       </div>
+
     </aside>
 
-    <!-- ========== MAIN CONTENT ========== -->
-    <main class="main-content" role="main" aria-label="Owner Dashboard">
+    <!-- ========== MAIN DASHBOARD AREA ========== -->
+    <main class="main-content" role="main">
 
-      <!-- Top Header -->
-      <div class="top-header">
+      <!-- Header -->
+      <header class="top-header">
         <div class="top-header-left">
           <h1>Owner Dashboard</h1>
           <p>Manage your turfs, slots & bookings</p>
         </div>
+
         <div class="top-header-actions">
+          <a href="{% url 'slot_management' %}" class="btn-add-turf">
+            <i class="fa-solid fa-clock"></i> Manage Slots
+          </a>
           <a href="{% url 'add_turf' %}" class="btn-add-turf">
             <i class="fa-solid fa-plus"></i> Add Turf
           </a>
-          <button class="btn-menu" aria-label="More options">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-          </button>
         </div>
-      </div>
+      </header>
 
-      <!-- Summary Cards -->
-      <section class="summary-cards" aria-label="Summary statistics">
+      <!-- Stats -->
+      <section class="summary-cards">
         <article class="summary-card">
           <div class="card-value">{{ owner_turfs|length }}</div>
           <div class="card-label">Total Turfs</div>
         </article>
+
         <article class="summary-card">
           <div class="card-value">0</div>
-          <div class="card-label">Total Bookings</div>
+          <div class="card-label">Bookings</div>
         </article>
+
         <article class="summary-card">
           <div class="card-value">₹0</div>
           <div class="card-label">Revenue</div>
         </article>
       </section>
 
-      <!-- Tab Navigation -->
-      <nav class="tab-nav" role="tablist" aria-label="Dashboard sections">
-        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="my-turfs"
-          onclick="switchTab('my-turfs', this)">
+      <!-- Navigation Tabs -->
+      <nav class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('my-turfs', this)">
           <i class="fa-solid fa-futbol"></i> My Turfs
         </button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="recent-bookings"
-          onclick="switchTab('recent-bookings', this)">
-          <i class="fa-solid fa-calendar-check"></i> Recent Bookings
+        <button class="tab-btn" onclick="switchTab('recent-bookings', this)">
+          <i class="fa-solid fa-calendar-check"></i> Bookings
         </button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="analytics"
-          onclick="switchTab('analytics', this)">
+        <button class="tab-btn" onclick="switchTab('analytics', this)">
           <i class="fa-solid fa-chart-simple"></i> Analytics
         </button>
       </nav>
 
-      <!-- Tab Content -->
-      <div class="tab-content">
+      <!-- Content Area -->
+      <section class="tab-content">
 
-        <!-- My Turfs Panel -->
-        <div class="tab-panel active" id="my-turfs" role="tabpanel">
+        <!-- My Turfs -->
+        <div class="tab-panel active" id="my-turfs">
           <div class="turf-list">
             {% if owner_turfs %}
-            {% for turf in owner_turfs %}
-            <div class="turf-card">
-              <div class="turf-info">
-                <h3>{{ turf.name }}</h3>
-                <p><i class="fa-solid fa-location-dot"></i> {{ turf.city }}, {{ turf.state }}</p>
+              {% for turf in owner_turfs %}
+              <div class="turf-card">
+                <div class="turf-info">
+                  <h3>{{ turf.name }}</h3>
+                  <p><i class="fa-solid fa-location-dot"></i> {{ turf.city }}, {{ turf.state }}</p>
+                </div>
+
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <span class="turf-status {{ turf.status }}">{{ turf.status }}</span>
+                  <span style="font-size:12px;">{{ turf.created_at|date:'d M Y' }}</span>
+                </div>
               </div>
-              <div style="display:flex; align-items:center; gap:12px;">
-                {% if turf.status == 'rejected' %}
-                <a href="{% url 'edit_turf' turf.id %}"
-                  style="padding:6px 14px; background:var(--bg-tertiary); border:1px solid #404040; border-radius:8px; color:#fff; font-size:13px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:all 0.2s ease;"
-                  onmouseover="this.style.borderColor='var(--accent-primary)'; this.style.color='var(--accent-primary)';"
-                  onmouseout="this.style.borderColor='#404040'; this.style.color='#fff';">
-                  <i class="fa-solid fa-pen-to-square"></i> Edit
-                </a>
-                {% endif %}
-                <span class="turf-status {{ turf.status }}">{{ turf.status }}</span>
-                <span style="font-size:12px; color:var(--text-muted);">{{ turf.created_at|date:'d M Y' }}</span>
-              </div>
-            </div>
-            {% endfor %}
+              {% endfor %}
             {% else %}
-            <p class="empty-state">No turfs added yet. Click <strong>"+ Add Turf"</strong> to get started.</p>
+              <p class="empty-state">
+                No turfs added yet. Click <strong>"+ Add Turf"</strong> to get started.
+              </p>
             {% endif %}
           </div>
         </div>
 
-        <!-- Recent Bookings Panel -->
-        <div class="tab-panel" id="recent-bookings" role="tabpanel">
-          <div class="filter-bar">
-            <label for="booking-filter">Filter by:</label>
-            <select id="booking-filter">
-              <option value="all">All Time</option>
-              <option value="today">Today</option>
-              <option value="week">This Week</option>
-              <option value="month">This Month</option>
-            </select>
-          </div>
-          <div class="booking-list">
-            <p class="empty-state">No bookings found</p>
-          </div>
+        <!-- Bookings -->
+        <div class="tab-panel" id="recent-bookings">
+          <p class="empty-state">No bookings found.</p>
         </div>
 
-        <!-- Analytics Panel -->
-        <div class="tab-panel" id="analytics" role="tabpanel">
-          <p class="empty-state">Analytics will be available once you have active turfs and bookings.</p>
+        <!-- Analytics -->
+        <div class="tab-panel" id="analytics">
+          <p class="empty-state">Analytics will appear once bookings start.</p>
         </div>
 
-      </div>
+      </section>
 
     </main>
   </div>
-
-  <script>
-    function switchTab(tabId, btn) {
-      // Remove active from all tabs and panels
-      document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-
-      // Activate clicked tab and matching panel
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-      document.getElementById(tabId).classList.add('active');
-    }
-  </script>
 </body>
 
 </html>
