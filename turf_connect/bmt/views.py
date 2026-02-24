@@ -9,6 +9,11 @@ from turfs.models import Turf, VerificationDocument, TurfImage
 User = get_user_model()
 
 
+def homepage(request):
+    """General landing page for all users."""
+    return render(request, 'homepage.html')
+
+
 @login_required(login_url='login')
 def player_home(request):
     if request.user.role != 'player':

@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Auth (accounts app)
-    path('', accounts_views.login_view, name='home'),
+    path('', bmt_views.homepage, name='home'),
     path('accounts/', include('accounts.urls')),
 
     # Dashboards (bmt app)
