@@ -345,7 +345,7 @@
 
 <body>
   <main class="register-container" role="main" aria-label="Player registration form">
-    <h1 class="register-header">🏟️ BOOKMYTURF</h1>
+    <h1 class="register-header">BOOKMYTURF</h1>
     <p class="register-subtitle">CREATE YOUR ACCOUNT<br>Join thousands of sports enthusiasts</p>
 
     {% if messages %}
@@ -371,26 +371,26 @@
       <!-- {{ form.as_p }} -->
       <div>
         <label for="fullname"> Name *</label>
-        <input id="fullname" name="username" type="text" placeholder="👤 Enter username (no spaces)" autocomplete="name"
+        <input id="fullname" name="username" type="text" placeholder="Enter username (no spaces)" autocomplete="name"
           required aria-required="true" />
       </div>
 
       <div>
         <label for="email">Email Address *</label>
-        <input id="email" name="email" type="email" placeholder="📧 Enter your email" autocomplete="email" required
+        <input id="email" name="email" type="email" placeholder="Enter your email" autocomplete="email" required
           aria-required="true" />
       </div>
 
       <div>
         <label for="phone">Phone Number *</label>
-        <input id="phone" name="phone" type="tel" placeholder="📱 +91 | Enter your phone number" autocomplete="tel"
+        <input id="phone" name="phone" type="tel" placeholder="+91 | Enter your phone number" autocomplete="tel"
           pattern="[0-9]{10,15}" required aria-required="true" />
       </div>
 
       <div>
         <label for="password">Password *</label>
         <div class="password-wrapper">
-          <input id="password" name="password1" type="password" placeholder="🔒 Create a strong password"
+          <input id="password" name="password1" type="password" placeholder="Create a strong password"
             autocomplete="new-password" required aria-required="true" />
           <button type="button" class="toggle-password" aria-label="Toggle password visibility" tabindex="0">
             <i class="fa-regular fa-eye"></i>
@@ -401,7 +401,7 @@
 
       <div>
         <label for="confirm-password">Confirm Password *</label>
-        <input id="confirm-password" name="password2" type="password" placeholder="🔒 Confirm your password"
+        <input id="confirm-password" name="password2" type="password" placeholder="Confirm your password"
           autocomplete="new-password" required aria-required="true" />
       </div>
 
@@ -421,6 +421,26 @@
   </main>
 
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleButtons = document.querySelectorAll('.toggle-password');
+      toggleButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const input = this.previousElementSibling;
+          const icon = this.querySelector('i');
+          if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+          } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

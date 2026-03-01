@@ -6,98 +6,350 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>BookMyTurf | Player Dashboard</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap"
         rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
     <style>
+        /* RESET & BASE */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0D0D0D;
             color: #FFFFFF;
+            line-height: 1.6;
             min-height: 100vh;
+            padding: 20px;
+            user-select: none;
+        }
+
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        a:hover,
+        a:focus-visible {
+            color: #00D4FF;
+            outline: none;
+            text-decoration: underline;
+        }
+
+        ::selection {
+            background: rgba(0, 212, 255, 0.22);
+        }
+
+        /* VARIABLES */
+        :root {
+            --accent-primary: #00D4FF;
+            --bg-secondary: #1A1A1A;
+            --bg-tertiary: #262626;
+            --radius-card: 16px;
+            --radius-button: 12px;
+            --transition-fast: all 0.2s ease-in-out;
+            --text-muted: #888888;
+        }
+
+        /* ============ PAGE LAYOUT ============ */
+        .page-wrapper {
+            display: flex;
+            gap: 24px;
+            max-width: 1300px;
+            margin: 0 auto;
+            align-items: stretch;
+            min-height: calc(100vh - 40px);
+        }
+
+        /* ============ LEFT SIDEBAR ============ */
+        .sidebar {
+            width: 240px;
+            flex-shrink: 0;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-card);
+            padding: 32px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 20px;
+            gap: 16px;
         }
 
-        .dashboard-header {
+        .sidebar-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--accent-primary);
+            border: 2px solid var(--accent-primary);
+        }
+
+        .sidebar-name {
+            font-weight: 700;
+            font-size: 16px;
             text-align: center;
-            margin-bottom: 40px;
         }
 
-        .dashboard-header h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 28px;
-            color: #00D4FF;
+        .sidebar-email {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            word-break: break-all;
+            user-select: text;
         }
 
-        .dashboard-header p {
-            color: #999;
+        .sidebar-role {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
+        }
+
+        .sidebar-btn {
+            width: 100%;
+            padding: 10px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid #404040;
+            border-radius: var(--radius-button);
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition-fast);
+            text-decoration: none;
             margin-top: 8px;
         }
 
-        .welcome-card {
-            background: #1A1A1A;
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 8px 40px rgba(0, 212, 255, 0.1);
+        .sidebar-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            text-decoration: none;
         }
 
-        .welcome-card h2 {
-            font-size: 22px;
+        .sidebar-logout {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid #333;
+            width: 100%;
+        }
+
+        .sidebar-logout button {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid #ff4d4d;
+            border-radius: var(--radius-button);
+            color: #ff4d4d;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition-fast);
+        }
+
+        .sidebar-logout button:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        /* ============ MAIN CONTENT ============ */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-card);
+            padding: 32px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 24px;
+            margin-bottom: 10px;
+        }
+
+        .top-header-left h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            color: #fff;
+        }
+
+        .top-header-left p {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* --- Summary Cards --- */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .summary-card {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-card);
+            padding: 28px 24px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+            transition: var(--transition-fast);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: #fff;
+        }
+
+        .summary-card:hover {
+            border-color: var(--accent-primary);
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        .summary-card .card-icon {
+            font-size: 32px;
+            color: var(--accent-primary);
             margin-bottom: 12px;
         }
 
-        .welcome-card p {
-            color: #999;
-            margin-bottom: 24px;
-        }
-
-        .logout-btn {
-            background: #00D4FF;
-            color: #000;
+        .summary-card .card-label {
+            font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            font-size: 16px;
-            padding: 12px 32px;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
+            font-size: 20px;
         }
 
-        .logout-btn:hover {
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-            transform: scale(1.05);
+        .summary-card p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 960px) {
+            .page-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 20px;
+                gap: 12px;
+                position: static;
+            }
+
+            .sidebar-logout {
+                border-top: none;
+                width: auto;
+                margin-top: 0;
+                padding-top: 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .top-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="dashboard-header">
-        <h1>🏟️ BOOKMYTURF</h1>
-        <p>Player Dashboard</p>
-    </div>
+    <div class="page-wrapper">
 
-    <div class="welcome-card">
-        <h2>Welcome, {{ user.username }}! 👋</h2>
-        <p>You're logged in as <strong>{{ user.email }}</strong></p>
-        <p style="color: #00D4FF; font-weight: 600;">Role: Player</p>
-        <br>
-        <form method="post" action="{% url 'logout' %}" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit" class="logout-btn">LOGOUT</button>
-        </form>
+        <!-- ========== LEFT SIDEBAR ========== -->
+        <aside class="sidebar" aria-label="Profile sidebar">
+            <div class="sidebar-avatar">
+                {{ request.user.username|make_list|first|upper }}{{ request.user.username|make_list|last|upper }}
+            </div>
+            <div class="sidebar-name">{{ request.user.username }}</div>
+            <div class="sidebar-email">{{ request.user.email }}</div>
+            <span class="sidebar-role">{{ request.user.get_role_display|default:"Player" }}</span>
+
+            <div class="sidebar-logout">
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <main class="main-content" role="main" aria-label="Player Dashboard">
+
+            <!-- Top Header -->
+            <div class="top-header">
+                <div class="top-header-left">
+                    <h1>Player Dashboard</h1>
+                    <p>Welcome back! Ready for your next game?</p>
+                </div>
+            </div>
+
+            <!-- Quick Actions / Navigation -->
+            <section class="summary-cards" aria-label="Quick Actions">
+                <a href="{% url 'booking_history' %}" class="summary-card">
+                    <div class="card-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                    <div class="card-label">My Bookings</div>
+                    <p>View your past and upcoming turf bookings</p>
+                </a>
+                <a href="{% url 'browse_turfs' %}" class="summary-card">
+                    <div class="card-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <div class="card-label">Browse Turfs</div>
+                    <p>Find and book a new turf near you</p>
+                </a>
+            </section>
+
+        </main>
     </div>
 </body>
 

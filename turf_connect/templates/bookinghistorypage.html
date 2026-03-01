@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +9,9 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap"
+    rel="stylesheet" />
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -20,9 +23,11 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     html {
       scroll-behavior: smooth;
     }
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: #0D0D0D;
@@ -35,15 +40,18 @@
       display: flex;
       flex-direction: column;
     }
+
     a {
       color: inherit;
       text-decoration: none;
     }
+
     a:focus-visible,
     button:focus-visible {
       outline: 2px solid #00D4FF;
       outline-offset: 3px;
     }
+
     ::selection {
       background: rgba(0, 212, 255, 0.22);
     }
@@ -90,10 +98,12 @@
       margin-bottom: 24px;
       color: var(--text-secondary);
     }
+
     nav.breadcrumb a {
       color: var(--accent-primary);
       font-weight: 600;
     }
+
     nav.breadcrumb a:hover {
       text-decoration: underline;
     }
@@ -140,6 +150,7 @@
       cursor: default;
       user-select: none;
     }
+
     .booking-card:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-hover);
@@ -152,7 +163,7 @@
       height: 72px;
       border-radius: var(--radius-card);
       background: linear-gradient(135deg, #004a6d, #007bbf);
-      box-shadow: inset 0 0 10px rgba(255,255,255,0.15);
+      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.15);
       flex-shrink: 0;
       display: flex;
       align-items: center;
@@ -172,6 +183,7 @@
       flex-direction: column;
       gap: 6px;
     }
+
     .booking-header {
       display: flex;
       justify-content: space-between;
@@ -182,6 +194,7 @@
       color: var(--accent-primary);
       user-select: none;
     }
+
     .booking-header .status {
       background: rgba(0, 212, 255, 0.18);
       color: var(--accent-primary);
@@ -194,9 +207,11 @@
       align-items: center;
       gap: 6px;
     }
+
     .booking-header .status i {
       font-size: 14px;
     }
+
     .booking-location {
       font-weight: 600;
       font-size: 14px;
@@ -206,21 +221,25 @@
       gap: 8px;
       user-select: none;
     }
+
     .booking-location i {
       color: var(--accent-primary);
     }
+
     .booking-datetime {
       font-weight: 600;
       font-size: 14px;
       color: var(--text-primary);
       user-select: none;
     }
+
     .booking-sport {
       font-weight: 600;
       font-size: 14px;
       color: var(--text-secondary);
       user-select: none;
     }
+
     .booking-meta {
       font-weight: 600;
       font-size: 14px;
@@ -229,13 +248,13 @@
       user-select: none;
     }
 
-    /* ACTIONS */
     .booking-actions {
       display: flex;
       gap: 12px;
       margin-top: 12px;
       flex-wrap: wrap;
     }
+
     .booking-actions a {
       background: transparent;
       border: 1.5px solid rgba(0, 212, 255, 0.6);
@@ -252,14 +271,80 @@
       gap: 8px;
       white-space: nowrap;
     }
+
     .booking-actions a:hover {
       background: var(--accent-primary);
       color: #000;
       box-shadow: 0 0 20px var(--accent-glow);
       text-decoration: none;
     }
+
     .booking-actions a i {
       font-size: 14px;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      /* For scrollbar breathing room */
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-primary) var(--bg-tertiary);
+    }
+
+    .filter-bar::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .filter-bar::-webkit-scrollbar-track {
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+    }
+
+    .filter-bar::-webkit-scrollbar-thumb {
+      background: var(--accent-primary);
+      border-radius: 4px;
+    }
+
+    .filter-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid #404040;
+      color: var(--text-secondary);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent-primary);
+      color: #fff;
+    }
+
+    .filter-btn.active {
+      background: rgba(0, 212, 255, 0.15);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    /* EMPTY STATE */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-card);
+      border: 1px dashed #404040;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 15px;
+      display: none;
+      /* Hidden by default */
     }
 
     /* LOAD MORE BUTTON */
@@ -268,6 +353,7 @@
       max-width: 900px;
       text-align: center;
     }
+
     .btn-load-more {
       background: transparent;
       border: 2px solid var(--accent-primary);
@@ -283,11 +369,13 @@
       align-items: center;
       gap: 12px;
     }
+
     .btn-load-more:hover {
       background: var(--accent-primary);
       color: #000;
       box-shadow: 0 0 30px var(--accent-glow);
     }
+
     .btn-load-more i {
       font-size: 18px;
     }
@@ -297,10 +385,12 @@
       .summary-grid {
         grid-template-columns: 1fr;
       }
+
       .booking-card {
         flex-direction: column;
         align-items: flex-start;
       }
+
       .booking-img {
         width: 100%;
         height: 140px;
@@ -308,118 +398,182 @@
         margin-bottom: 16px;
         font-size: 18px;
       }
+
       .booking-actions {
         justify-content: flex-start;
       }
     }
   </style>
 </head>
+
 <body>
   <div class="container" role="main" aria-label="My Booking History">
 
     <h1 class="page-title">My Booking History</h1>
 
     <p class="info-note" aria-live="polite" aria-atomic="true">
-      ℹ️ This page shows completed bookings only.
+       This page shows completed bookings only.
     </p>
 
-    <section class="bookings-list" aria-label="Completed bookings list">
+    <!-- NEW FILTER BAR -->
+    <div class="filter-bar" aria-label="Time filters">
+      <button class="filter-btn active" data-filter="today">Today</button>
+      <button class="filter-btn" data-filter="next7">Next 7 Days</button>
+      <button class="filter-btn" data-filter="last7">Last 7 Days</button>
+      <button class="filter-btn" data-filter="lastMonth">Last Month</button>
+      <button class="filter-btn" data-filter="all">All Time</button>
+    </div>
 
-      <!-- Booking 1 -->
-      <article class="booking-card" tabindex="0" aria-label="Booking at Sports Hub Arena, completed">
-        <div class="booking-img" aria-hidden="true">IMG</div>
+    <!-- EMPTY STATE -->
+    <div class="empty-state" id="emptyState">
+      No bookings found for this period.
+    </div>
+
+    <section class="bookings-list" aria-label="Completed bookings list" id="bookingsList">
+
+      {% for booking in bookings %}
+      <article class="booking-card" tabindex="0" aria-label="Booking at {{ booking.turf.name }}">
+        <div class="booking-img" aria-hidden="true">
+          {% if booking.turf.images.first %}
+          <img src="{{ booking.turf.images.first.image.url }}" alt="{{ booking.turf.name }}"
+            style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-card);" />
+          {% else %}
+          IMG
+          {% endif %}
+        </div>
         <div class="booking-info">
           <div class="booking-header">
-            Sports Hub Arena
-            <span class="status" aria-label="Booking completed"><i class="fa-solid fa-check"></i> COMPLETED</span>
+            {{ booking.turf.name }}
+            <span class="status" aria-label="Booking {{ booking.status }}">
+              <i class="fa-solid fa-check"></i>
+            </span>
           </div>
-          <div class="booking-location"><i class="fa-solid fa-location-dot"></i> Bandra East, Mumbai</div>
-          <div class="booking-datetime">Jan 5, 2026 | 6:00 PM - 7:00 PM</div>
-          <div class="booking-sport">🏏 Cricket</div>
+          <div class="booking-location">
+            <i class="fa-solid fa-location-dot"></i>
+            {{ booking.turf.city }}
+          </div>
+          <div class="booking-datetime">
+            {{ booking.date|date:"M j, Y" }}
+          </div>
+          <div class="booking-sport">🏏 Cricket / Football</div>
           <div class="booking-meta">
-            Booking ID: #BMT20260105003<br />
-            Amount Paid: ₹1200
+            Booking ID: #BMT{{ booking.id }}<br />
+            Amount Paid: ₹{{ booking.total_amount }}
           </div>
           <div class="booking-actions">
-            <a href="booking-details.html?id=BMT20260105003" aria-label="View details of booking BMT20260105003">
+            <a href="#" aria-label="View details of booking BMT{{ booking.id }}">
               <i class="fa-solid fa-eye"></i> View Details
             </a>
-            <a href="turf-detail.html?id=2" aria-label="Book again Sports Hub Arena">
+            <a href="/turf/{{ booking.turf.id }}/" aria-label="Book again {{ booking.turf.name }}">
               <i class="fa-solid fa-repeat"></i> Book Again
             </a>
-            <a href="write-review.html?turf=2" aria-label="Write review for Sports Hub Arena">
+            <a href="#" aria-label="Write review for {{ booking.turf.name }}">
               <i class="fa-solid fa-pen"></i> Write Review
             </a>
           </div>
         </div>
       </article>
-
-      <!-- Booking 2 -->
-      <article class="booking-card" tabindex="0" aria-label="Booking at Green Arena Sports, completed">
-        <div class="booking-img" aria-hidden="true">IMG</div>
-        <div class="booking-info">
-          <div class="booking-header">
-            Green Arena Sports
-            <span class="status" aria-label="Booking completed"><i class="fa-solid fa-check"></i> COMPLETED</span>
-          </div>
-          <div class="booking-location"><i class="fa-solid fa-location-dot"></i> Andheri West, Mumbai</div>
-          <div class="booking-datetime">Jan 2, 2026 | 7:00 AM - 8:00 AM</div>
-          <div class="booking-sport">🏈 Football</div>
-          <div class="booking-meta">
-            Booking ID: #BMT20260102007<br />
-            Amount Paid: ₹850
-          </div>
-          <div class="booking-actions">
-            <a href="bookinghistorypage.html">
-
-              <i class="fa-solid fa-eye"></i> View Details
-            </a>
-            <a href="turfdetail.html" aria-label="Book again Green Arena Sports">
-              <i class="fa-solid fa-repeat"></i> Book Again
-            </a>
-            <a href="turfdetail.html?id=2">
-
-          </div>
-        </div>
-      </article>
-
-      <!-- Booking 3 -->
-      <article class="booking-card" tabindex="0" aria-label="Booking at Prime Turf Arena, completed">
-        <div class="booking-img" aria-hidden="true">IMG</div>
-        <div class="booking-info">
-          <div class="booking-header">
-            Prime Turf Arena
-            <span class="status" aria-label="Booking completed"><i class="fa-solid fa-check"></i> COMPLETED</span>
-          </div>
-          <div class="booking-location"><i class="fa-solid fa-location-dot"></i> Powai, Mumbai</div>
-          <div class="booking-datetime">Dec 28, 2025 | 5:00 PM - 6:00 PM</div>
-          <div class="booking-sport">🏈 Football</div>
-          <div class="booking-meta">
-            Booking ID: #BMT20251228012<br />
-            Amount Paid: ₹1500
-          </div>
-          <div class="booking-actions">
-            <a href="booking-details.html?id=BMT20251228012" aria-label="View details of booking BMT20251228012">
-              <i class="fa-solid fa-eye"></i> View Details
-            </a>
-            <a href="turf-detail.html?id=3" aria-label="Book again Prime Turf Arena">
-              <i class="fa-solid fa-repeat"></i> Book Again
-            </a>
-            <a href="write-review.html?turf=3" aria-label="Write review for Prime Turf Arena">
-              <i class="fa-solid fa-pen"></i> Write Review
-            </a>
-          </div>
-        </div>
-      </article>
+      {% empty %}
+      <!-- Empty backend list fallback (different from JS front-end empty state) -->
+      <p class="empty-state" style="display: block;">You have no bookings yet. Go book a turf!</p>
+      {% endfor %}
 
     </section>
 
     <div class="load-more-wrap" style="margin-top: 20px;">
-  <a href="browse.html" class="btn-load-more" aria-label="Book a new turf">
-    <i class="fa-solid fa-futbol"></i> Book New Turf
-  </a>
-</div>
+      <a href="{% url 'browse_turfs' %}" class="btn-load-more" aria-label="Book a new turf">
+        <i class="fa-solid fa-futbol"></i> Book New Turf
+      </a>
+    </div>
 
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      const bookingCards = document.querySelectorAll(".booking-card");
+      const emptyState = document.getElementById("emptyState");
+
+      // We parse the date format "Jan 5, 2026 | 6:00 PM - 7:00 PM"
+      function parseBookingDate(dateStr) {
+        // split by '|' and take the first part
+        const datePart = dateStr.split('|')[0].trim();
+        return new Date(datePart);
+      }
+
+      function diffDays(date1, date2) {
+        const d1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
+        const d2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
+        const diffTime = d1 - d2;
+        return diffTime / (1000 * 60 * 60 * 24);
+      }
+
+      function isDateInPeriod(bookingDate, filterType) {
+        if (filterType === "all") return true;
+
+        const now = new Date();
+        const diff = diffDays(bookingDate, now);
+
+        if (filterType === "today") {
+          return diff === 0;
+        } else if (filterType === "next7") {
+          return diff > 0 && diff <= 7;
+        } else if (filterType === "last7") {
+          return diff < 0 && diff >= -7;
+        } else if (filterType === "lastMonth") {
+          // approx 30 days
+          return diff < 0 && diff >= -30;
+        }
+        return true;
+      }
+
+      function applyFilter(filterType) {
+        let visibleCount = 0;
+
+        bookingCards.forEach(card => {
+          const datetimeEl = card.querySelector(".booking-datetime");
+          if (!datetimeEl) return;
+
+          const bookingDate = parseBookingDate(datetimeEl.textContent);
+
+          if (isNaN(bookingDate.getTime())) {
+            // invalid date fallback
+            card.style.display = "flex";
+            visibleCount++;
+            return;
+          }
+
+          if (isDateInPeriod(bookingDate, filterType)) {
+            card.style.display = "flex";
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (visibleCount === 0) {
+          emptyState.style.display = "block";
+        } else {
+          emptyState.style.display = "none";
+        }
+      }
+
+      // Button click events
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          // update active class
+          filterBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          const filterType = btn.getAttribute("data-filter");
+          applyFilter(filterType);
+        });
+      });
+
+      // Initial apply (Defaults to "today" because of active class in HTML)
+      applyFilter("today");
+    });
+  </script>
 </body>
+
 </html>

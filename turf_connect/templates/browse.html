@@ -991,7 +991,9 @@
   <header class="nav">
     <div class="container">
       <div class="nav-inner">
-        <a class="brand" href="home.html" aria-label="BookMyTurf Home">
+        <a class="brand"
+          href="{% if request.user.is_authenticated %}{% if request.user.role == 'player' %}{% url 'player_home' %}{% elif request.user.role == 'owner' %}{% url 'owner_home' %}{% elif request.user.role == 'admin' %}{% url 'admin_dashboard' %}{% else %}{% url 'home' %}{% endif %}{% else %}{% url 'home' %}{% endif %}"
+          aria-label="BookMyTurf Home">
           <span class="brand-badge" aria-hidden="true"><i class="fa-solid fa-futbol"></i></span>
           <span>BookMyTurf</span>
         </a>
@@ -999,26 +1001,40 @@
         <input class="nav-toggle" type="checkbox" id="navToggle" aria-label="Toggle navigation menu">
         <label class="hamburger" for="navToggle" aria-hidden="true"><span></span></label>
 
-        <nav aria-label="Primary navigation">
+        <nav aria-label="Primary navigation" style="flex: 1; display: flex; justify-content: center;">
           <ul class="links">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="browse.html" aria-current="page">Browse Turf</a></li>
-            <li><a href="playerlogin.html">Login</a></li>
+            <li>
+              <a
+                href="{% if request.user.is_authenticated %}{% if request.user.role == 'player' %}{% url 'player_home' %}{% elif request.user.role == 'owner' %}{% url 'owner_home' %}{% elif request.user.role == 'admin' %}{% url 'admin_dashboard' %}{% else %}{% url 'home' %}{% endif %}{% else %}{% url 'home' %}{% endif %}">Home</a>
+            </li>
+            <li><a href="{% url 'browse_turfs' %}" aria-current="page">Browse Turf</a></li>
+            {% if not request.user.is_authenticated %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% else %}
+            <li>
+              <div class="profile" id="profile">
+                <button class="btn btn-ghost" id="profileBtn" aria-haspopup="menu" aria-expanded="false"
+                  style="padding: 10px 12px; height: auto;">
+                  <i class="fa-regular fa-user"></i> Profile <i class="fa-solid fa-caret-down" aria-hidden="true"></i>
+                </button>
+                <div class="profile-menu" id="profileMenu" role="menu" aria-label="Profile menu">
+                  <a role="menuitem"
+                    href="{% if request.user.role == 'player' %}{% url 'player_dashboard' %}{% elif request.user.role == 'owner' %}{% url 'owner_dashboard' %}{% else %}{% url 'admin_dashboard' %}{% endif %}">My
+                    Profile</a>
+                  <a role="menuitem" href="{% url 'booking_history' %}">My Bookings</a>
+                  <form method="post" action="{% url 'logout' %}" style="margin: 0;">
+                    {% csrf_token %}
+                    <button type="submit" role="menuitem"
+                      style="background: none; border: none; color: inherit; font: inherit; cursor: pointer; width: 100%; text-align: left; padding: 12px 20px;">Logout</button>
+                  </form>
+                </div>
+              </div>
+            </li>
+            {% endif %}
           </ul>
         </nav>
 
-        <div class="nav-right">
-          <div class="profile" id="profile">
-            <button class="btn btn-ghost" id="profileBtn" aria-haspopup="menu" aria-expanded="false">
-              <i class="fa-regular fa-user"></i> Profile <i class="fa-solid fa-caret-down" aria-hidden="true"></i>
-            </button>
-            <div class="profile-menu" id="profileMenu" role="menu" aria-label="Profile menu">
-              <a role="menuitem" href="playerlogin.html">My Profile</a>
-              <a role="menuitem" href="bookinghistorypage.html">My Bookings</a>
-              <a role="menuitem" href="playerlogin.html">Logout</a>
-
-            </div>
-          </div>
+        <div class="nav-right" style="width: 154px;">
         </div>
       </div>
     </div>
@@ -1031,7 +1047,7 @@
         <div class="head-row reveal">
           <div>
             <h1>Browse Turfs</h1>
-            <p>Find the perfect turf for your game. Filter by location and price—then book your best slot.</p>
+            <p>Find the perfect turf for your game. Filter by location and price then book your best slot.</p>
           </div>
           <div class="found" aria-live="polite">Found: <b id="foundCount">24</b> turfs</div>
         </div>
@@ -1348,14 +1364,18 @@
 
     // Profile dropdown interactions
     function closeProfile() {
-      profile.classList.remove("open");
-      profileBtn.setAttribute("aria-expanded", "false");
+      if (profile) {
+        profile.classList.remove("open");
+        profileBtn.setAttribute("aria-expanded", "false");
+      }
     }
-    profileBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const open = profile.classList.toggle("open");
-      profileBtn.setAttribute("aria-expanded", String(open));
-    });
+    if (profileBtn) {
+      profileBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const open = profile.classList.toggle("open");
+        profileBtn.setAttribute("aria-expanded", String(open));
+      });
+    }
     document.addEventListener("click", closeProfile);
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeProfile(); });
 

@@ -211,7 +211,7 @@
 
 <body>
   <main class="container" role="main" aria-label="Admin login form">
-    <h1 class="header">🏟️ BOOKMYTURF</h1>
+    <h1 class="header">BOOKMYTURF</h1>
     <p class="subheader">ADMIN PORTAL</p>
 
     {% if messages %}
@@ -226,14 +226,14 @@
       {% csrf_token %}
       <div>
         <label for="admin-email">Admin Email</label>
-        <input id="admin-email" name="email" type="email" placeholder="📧 Enter admin email" autocomplete="email"
-          required aria-required="true" />
+        <input id="admin-email" name="email" type="email" placeholder="Enter admin email" autocomplete="email" required
+          aria-required="true" />
       </div>
 
       <div>
         <label for="admin-password">Password</label>
         <div class="password-wrapper">
-          <input id="admin-password" name="password" type="password" placeholder="🔒 Enter password"
+          <input id="admin-password" name="password" type="password" placeholder="Enter password"
             autocomplete="current-password" required aria-required="true" />
           <button type="button" class="toggle-password" aria-label="Toggle password visibility" tabindex="0">
             <i class="fa-regular fa-eye"></i>
@@ -246,8 +246,28 @@
       </button>
     </form>
 
-    <p class="footer-note">🔒 Secure access for authorized personnel only</p>
+    <p class="footer-note">Secure access for authorized personnel only</p>
   </main>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleButtons = document.querySelectorAll('.toggle-password');
+      toggleButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const input = this.previousElementSibling;
+          const icon = this.querySelector('i');
+          if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+          } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

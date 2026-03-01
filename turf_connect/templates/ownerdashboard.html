@@ -511,6 +511,158 @@
       color: #ff4d4d;
     }
 
+    /* ============ ANALYTICS ============ */
+    .analytics-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .analytics-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .metric-card {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      border: 1px solid #2a2a2a;
+      transition: var(--transition-fast);
+    }
+
+    .metric-card:hover {
+      border-color: var(--accent-primary);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .metric-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+
+    .metric-icon.revenue {
+      background: rgba(74, 222, 128, 0.12);
+      color: var(--accent-green);
+    }
+
+    .metric-icon.bookings {
+      background: rgba(0, 212, 255, 0.12);
+      color: var(--accent-primary);
+    }
+
+    .metric-icon.rating {
+      background: rgba(255, 193, 7, 0.12);
+      color: #ffc107;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .metric-compare {
+      font-size: 12px;
+      color: var(--accent-green);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .analytics-charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .chart-card {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      border: 1px solid #2a2a2a;
+    }
+
+    .chart-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .chart-placeholder {
+      width: 100%;
+      height: 180px;
+      position: relative;
+    }
+
+    .chart-placeholder svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .weekly-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .weekly-stat-item .ws-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .weekly-stat-item .ws-value {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .weekly-stat-item .ws-compare {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .weekly-change {
+      font-size: 13px;
+      color: var(--accent-green);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .analytics-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .analytics-charts {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ============ RESPONSIVE ============ */
     @media (max-width: 960px) {
       .page-wrapper {
@@ -608,7 +760,7 @@
           <div class="card-label">Total Turfs</div>
         </article>
         <article class="summary-card">
-          <div class="card-value">0</div>
+          <div class="card-value" id="total-bookings-count">0</div>
           <div class="card-label">Total Bookings</div>
         </article>
         <article class="summary-card">
@@ -678,21 +830,140 @@
         <div class="tab-panel" id="recent-bookings" role="tabpanel">
           <div class="filter-bar">
             <label for="booking-filter">Filter by:</label>
-            <select id="booking-filter">
-              <option value="all">All Time</option>
+            <select id="booking-filter" onchange="filterBookings(this.value)">
+              <option value="all" selected>All Time</option>
               <option value="today">Today</option>
               <option value="week">This Week</option>
               <option value="month">This Month</option>
             </select>
           </div>
-          <div class="booking-list">
-            <p class="empty-state">No bookings found</p>
+          <div class="booking-list" id="booking-list">
+            {% for turf in owner_turfs %}
+            {% for booking in turf.turf_bookings.all %}
+            {% for slot in booking.slots.all %}
+            <div class="booking-item" data-date="{{ slot.date|date:'Y-m-d' }}">
+              <div class="booking-time">
+                <div>{{ slot.date|date:'d M Y' }}</div>
+                <div style="font-size:13px; font-weight:500; color:#ccc;">{{ slot.start_time|time:'h:i A' }}</div>
+              </div>
+              <div class="booking-details">
+                <span class="booking-player">{{ turf.name }}</span>
+                <span class="booking-contact"><i class="fa-solid fa-user"></i> {{ booking.player.username }}</span>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-weight:700; font-size:15px; color:var(--accent-green);">₹{{ booking.total_amount }}
+                </div>
+                <span class="booking-status-badge">{{ booking.status }}</span>
+              </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            {% empty %}
+            <p class="empty-state" id="no-bookings-msg">No bookings found for this period.</p>
+            {% endfor %}
+            <p class="empty-state" id="filter-empty-msg" style="display:none;">No bookings found for this period.</p>
           </div>
         </div>
 
         <!-- Analytics Panel -->
         <div class="tab-panel" id="analytics" role="tabpanel">
-          <p class="empty-state">Analytics will be available once you have active turfs and bookings.</p>
+          <div class="analytics-section">
+
+            <!-- Metric Cards -->
+            <div class="analytics-metrics">
+              <div class="metric-card">
+                <div class="metric-icon revenue"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                <div class="metric-label">Revenue</div>
+                <div class="metric-value" id="analytics-revenue">₹0</div>
+                <div class="metric-compare" id="analytics-revenue-compare"><i class="fa-solid fa-arrow-trend-up"></i> 0%
+                  vs last period</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon bookings"><i class="fa-solid fa-calendar-check"></i></div>
+                <div class="metric-label">Bookings</div>
+                <div class="metric-value" id="analytics-bookings">0</div>
+                <div class="metric-compare" id="analytics-bookings-compare"><i class="fa-solid fa-arrow-trend-up"></i>
+                  0% vs last period</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon rating"><i class="fa-solid fa-star"></i></div>
+                <div class="metric-label">Rating</div>
+                <div class="metric-value">0.0</div>
+                <div class="metric-compare"><i class="fa-solid fa-arrow-trend-up"></i> 0% vs last period</div>
+              </div>
+            </div>
+
+            <!-- Chart Sections -->
+            <div class="analytics-charts">
+
+              <!-- Revenue by Day -->
+              <div class="chart-card">
+                <h3><i class="fa-solid fa-chart-line" style="color:var(--accent-primary); margin-right:8px;"></i>Revenue
+                  by Day</h3>
+                <div class="chart-placeholder" id="revenue-chart-container">
+                  <svg id="revenue-chart-svg" viewBox="0 0 400 180" preserveAspectRatio="none">
+                    <!-- Grid lines -->
+                    <line x1="40" y1="10" x2="40" y2="150" stroke="#2a2a2a" stroke-width="1" />
+                    <line x1="40" y1="150" x2="390" y2="150" stroke="#2a2a2a" stroke-width="1" />
+                    <line x1="40" y1="115" x2="390" y2="115" stroke="#1a1a1a" stroke-width="0.5" stroke-dasharray="4" />
+                    <line x1="40" y1="80" x2="390" y2="80" stroke="#1a1a1a" stroke-width="0.5" stroke-dasharray="4" />
+                    <line x1="40" y1="45" x2="390" y2="45" stroke="#1a1a1a" stroke-width="0.5" stroke-dasharray="4" />
+                    <!-- Y-axis labels -->
+                    <text x="30" y="154" fill="#888" font-size="9" text-anchor="end">0</text>
+                    <text x="30" y="119" fill="#888" font-size="9" text-anchor="end">1</text>
+                    <text x="30" y="84" fill="#888" font-size="9" text-anchor="end">2</text>
+                    <text x="30" y="49" fill="#888" font-size="9" text-anchor="end">3</text>
+                    <text x="30" y="14" fill="#888" font-size="9" text-anchor="end">4</text>
+                    <!-- X-axis labels -->
+                    <text x="90" y="168" fill="#888" font-size="9" text-anchor="middle">Mon</text>
+                    <text x="140" y="168" fill="#888" font-size="9" text-anchor="middle">Tue</text>
+                    <text x="190" y="168" fill="#888" font-size="9" text-anchor="middle">Wed</text>
+                    <text x="240" y="168" fill="#888" font-size="9" text-anchor="middle">Thu</text>
+                    <text x="290" y="168" fill="#888" font-size="9" text-anchor="middle">Fri</text>
+                    <text x="340" y="168" fill="#888" font-size="9" text-anchor="middle">Sat</text>
+                    <text x="390" y="168" fill="#888" font-size="9" text-anchor="middle">Sun</text>
+                    <!-- Flat line at zero -->
+                    <polyline points="90,150 140,150 190,150 240,150 290,150 340,150 390,150" fill="none"
+                      stroke="var(--accent-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <!-- Data dots -->
+                    <circle cx="90" cy="150" r="3" fill="var(--accent-primary)" />
+                    <circle cx="140" cy="150" r="3" fill="var(--accent-primary)" />
+                    <circle cx="190" cy="150" r="3" fill="var(--accent-primary)" />
+                    <circle cx="240" cy="150" r="3" fill="var(--accent-primary)" />
+                    <circle cx="290" cy="150" r="3" fill="var(--accent-primary)" />
+                    <circle cx="340" cy="150" r="3" fill="var(--accent-primary)" />
+                    <circle cx="390" cy="150" r="3" fill="var(--accent-primary)" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Weekly Comparison -->
+              <div class="chart-card">
+                <h3><i class="fa-solid fa-scale-balanced"
+                    style="color:var(--accent-primary); margin-right:8px;"></i>Weekly Comparison</h3>
+                <div class="weekly-stats">
+                  <div class="weekly-stat-item">
+                    <div class="ws-label">Bookings</div>
+                    <div class="ws-value" id="wk-bookings">0</div>
+                    <div class="ws-compare" id="wk-bookings-vs">vs 0</div>
+                  </div>
+                  <div class="weekly-stat-item">
+                    <div class="ws-label">Revenue</div>
+                    <div class="ws-value" id="wk-revenue">₹0.0k</div>
+                    <div class="ws-compare" id="wk-revenue-vs">vs ₹0.0k</div>
+                  </div>
+                  <div class="weekly-stat-item">
+                    <div class="ws-label">Avg/Day</div>
+                    <div class="ws-value" id="wk-avg">0.0</div>
+                    <div class="ws-compare" id="wk-avg-vs">vs 0.0</div>
+                  </div>
+                </div>
+                <div class="weekly-change" id="wk-change"><i class="fa-solid fa-arrow-trend-up"></i> 0% change from last
+                  week</div>
+              </div>
+
+            </div>
+          </div>
         </div>
 
       </div>
@@ -700,20 +971,244 @@
     </main>
   </div>
 
+  <!-- Booking data for analytics (rendered by Django) -->
+  <script type="application/json" id="analytics-data">
+  [
+    {% for turf in owner_turfs %}
+      {% for booking in turf.turf_bookings.all %}
+        {"id": {{ booking.id }}, "date": "{{ booking.date|date:'Y-m-d' }}", "amount": {{ booking.total_amount }}, "status": "{{ booking.status }}"}
+        {% if not forloop.last or not forloop.parentloop.last %},{% endif %}
+      {% endfor %}
+    {% endfor %}
+  ]
+  </script>
+
   <script>
     function switchTab(tabId, btn) {
-      // Remove active from all tabs and panels
       document.querySelectorAll('.tab-btn').forEach(b => {
         b.classList.remove('active');
         b.setAttribute('aria-selected', 'false');
       });
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-
-      // Activate clicked tab and matching panel
       btn.classList.add('active');
       btn.setAttribute('aria-selected', 'true');
       document.getElementById(tabId).classList.add('active');
     }
+
+    function filterBookings(period) {
+      const items = document.querySelectorAll('#booking-list .booking-item');
+      const emptyMsg = document.getElementById('filter-empty-msg');
+      const noBookingsMsg = document.getElementById('no-bookings-msg');
+      if (items.length === 0) return;  // No bookings at all, static message is shown
+
+      const now = new Date();
+      const todayStr = now.toISOString().slice(0, 10);
+
+      // Get Monday of current week
+      const dayOfWeek = now.getDay();
+      const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+      const weekStart = new Date(now);
+      weekStart.setDate(now.getDate() + mondayOffset);
+      weekStart.setHours(0, 0, 0, 0);
+      const weekStartStr = weekStart.toISOString().slice(0, 10);
+
+      // Get Sunday of current week
+      const weekEnd = new Date(weekStart);
+      weekEnd.setDate(weekStart.getDate() + 6);
+      const weekEndStr = weekEnd.toISOString().slice(0, 10);
+
+      // Get first and last day of current month
+      const monthStartStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-01';
+      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+      const monthEndStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(lastDay).padStart(2, '0');
+
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const dateStr = item.getAttribute('data-date');
+        let show = false;
+
+        switch (period) {
+          case 'all':
+            show = true;
+            break;
+          case 'today':
+            show = dateStr === todayStr;
+            break;
+          case 'week':
+            show = dateStr >= weekStartStr && dateStr <= weekEndStr;
+            break;
+          case 'month':
+            show = dateStr >= monthStartStr && dateStr <= monthEndStr;
+            break;
+        }
+
+        item.style.display = show ? '' : 'none';
+        if (show) visibleCount++;
+      });
+
+      if (emptyMsg) emptyMsg.style.display = visibleCount === 0 ? '' : 'none';
+      if (noBookingsMsg) noBookingsMsg.style.display = 'none';
+    }
+
+    function computeAnalytics() {
+      let bookings = [];
+      try {
+        bookings = JSON.parse(document.getElementById('analytics-data').textContent);
+      } catch (e) { return; }
+
+      // --- Helper: get Monday of a date's week ---
+      function getMonday(d) {
+        const dt = new Date(d + 'T00:00:00');
+        const day = dt.getDay();
+        const diff = day === 0 ? -6 : 1 - day;
+        dt.setDate(dt.getDate() + diff);
+        return dt.toISOString().slice(0, 10);
+      }
+
+      const now = new Date();
+      const todayStr = now.toISOString().slice(0, 10);
+      const thisMonday = getMonday(todayStr);
+
+      // Last week Monday
+      const lastMondayDate = new Date(thisMonday + 'T00:00:00');
+      lastMondayDate.setDate(lastMondayDate.getDate() - 7);
+      const lastMonday = lastMondayDate.toISOString().slice(0, 10);
+      const lastSundayDate = new Date(lastMondayDate);
+      lastSundayDate.setDate(lastMondayDate.getDate() + 6);
+      const lastSunday = lastSundayDate.toISOString().slice(0, 10);
+
+      const thisSundayDate = new Date(thisMonday + 'T00:00:00');
+      thisSundayDate.setDate(thisSundayDate.getDate() + 6);
+      const thisSunday = thisSundayDate.toISOString().slice(0, 10);
+
+      // --- Totals ---
+      const totalRevenue = bookings.reduce((s, b) => s + parseFloat(b.amount), 0);
+      const totalBookings = bookings.length;
+
+      document.getElementById('analytics-revenue').textContent = '₹' + totalRevenue.toLocaleString('en-IN');
+      document.getElementById('analytics-bookings').textContent = totalBookings;
+
+      // --- This month vs last month ---
+      const thisMonth = todayStr.slice(0, 7);
+      const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      const lastMonth = lastMonthDate.getFullYear() + '-' + String(lastMonthDate.getMonth() + 1).padStart(2, '0');
+
+      const thisMonthRev = bookings.filter(b => b.date.slice(0, 7) === thisMonth).reduce((s, b) => s + parseFloat(b.amount), 0);
+      const lastMonthRev = bookings.filter(b => b.date.slice(0, 7) === lastMonth).reduce((s, b) => s + parseFloat(b.amount), 0);
+      const thisMonthCount = bookings.filter(b => b.date.slice(0, 7) === thisMonth).length;
+      const lastMonthCount = bookings.filter(b => b.date.slice(0, 7) === lastMonth).length;
+
+      function pctChange(curr, prev) {
+        if (prev === 0) return curr > 0 ? 100 : 0;
+        return Math.round(((curr - prev) / prev) * 100);
+      }
+
+      const revPct = pctChange(thisMonthRev, lastMonthRev);
+      const bkPct = pctChange(thisMonthCount, lastMonthCount);
+
+      function trendIcon(pct) {
+        return pct >= 0
+          ? '<i class="fa-solid fa-arrow-trend-up"></i>'
+          : '<i class="fa-solid fa-arrow-trend-down"></i>';
+      }
+      function trendColor(pct) { return pct >= 0 ? 'var(--accent-green)' : '#ff4d4d'; }
+
+      const revCompEl = document.getElementById('analytics-revenue-compare');
+      revCompEl.innerHTML = trendIcon(revPct) + ' ' + Math.abs(revPct) + '% vs last month';
+      revCompEl.style.color = trendColor(revPct);
+
+      const bkCompEl = document.getElementById('analytics-bookings-compare');
+      bkCompEl.innerHTML = trendIcon(bkPct) + ' ' + Math.abs(bkPct) + '% vs last month';
+      bkCompEl.style.color = trendColor(bkPct);
+
+      // --- Revenue by Day chart ---
+      const dayRevenue = [0, 0, 0, 0, 0, 0, 0]; // Mon-Sun
+      bookings.forEach(b => {
+        if (b.date >= thisMonday && b.date <= thisSunday) {
+          const dt = new Date(b.date + 'T00:00:00');
+          let idx = dt.getDay() - 1; // Mon=0 ... Sat=5
+          if (idx < 0) idx = 6; // Sun=6
+          dayRevenue[idx] += parseFloat(b.amount);
+        }
+      });
+
+      const maxRev = Math.max(...dayRevenue, 1);
+      const xPositions = [90, 140, 190, 240, 290, 340, 390];
+      const chartTop = 10, chartBottom = 150;
+      const chartRange = chartBottom - chartTop;
+
+      // Build nice Y-axis steps
+      const yStep = Math.ceil(maxRev / 4);
+      const yLabels = [0, yStep, yStep * 2, yStep * 3, yStep * 4];
+
+      let svgContent = '';
+      // Grid
+      svgContent += '<line x1="40" y1="10" x2="40" y2="150" stroke="#2a2a2a" stroke-width="1"/>';
+      svgContent += '<line x1="40" y1="150" x2="390" y2="150" stroke="#2a2a2a" stroke-width="1"/>';
+      const gridYs = [150, 115, 80, 45, 10];
+      for (let i = 0; i < 5; i++) {
+        if (i > 0) svgContent += '<line x1="40" y1="' + gridYs[i] + '" x2="390" y2="' + gridYs[i] + '" stroke="#1a1a1a" stroke-width="0.5" stroke-dasharray="4"/>';
+        svgContent += '<text x="30" y="' + (gridYs[i] + 4) + '" fill="#888" font-size="9" text-anchor="end">' + yLabels[i] + '</text>';
+      }
+      // X-axis labels
+      const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      for (let i = 0; i < 7; i++) {
+        svgContent += '<text x="' + xPositions[i] + '" y="168" fill="#888" font-size="9" text-anchor="middle">' + dayNames[i] + '</text>';
+      }
+      // Polyline + dots
+      const yMax = yLabels[4] || 1;
+      let points = '';
+      for (let i = 0; i < 7; i++) {
+        const y = chartBottom - (dayRevenue[i] / yMax) * chartRange;
+        points += xPositions[i] + ',' + y.toFixed(1);
+        if (i < 6) points += ' ';
+      }
+      // Gradient fill area
+      svgContent += '<defs><linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--accent-primary)" stop-opacity="0.3"/><stop offset="100%" stop-color="var(--accent-primary)" stop-opacity="0"/></linearGradient></defs>';
+      svgContent += '<polygon points="90,' + chartBottom + ' ' + points + ' 390,' + chartBottom + '" fill="url(#chartGrad)"/>';
+      svgContent += '<polyline points="' + points + '" fill="none" stroke="var(--accent-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+      for (let i = 0; i < 7; i++) {
+        const y = chartBottom - (dayRevenue[i] / yMax) * chartRange;
+        svgContent += '<circle cx="' + xPositions[i] + '" cy="' + y.toFixed(1) + '" r="3" fill="var(--accent-primary)"/>';
+      }
+
+      document.getElementById('revenue-chart-svg').innerHTML = svgContent;
+
+      // --- Weekly Comparison ---
+      const thisWeekBookings = bookings.filter(b => b.date >= thisMonday && b.date <= thisSunday);
+      const lastWeekBookings = bookings.filter(b => b.date >= lastMonday && b.date <= lastSunday);
+
+      const twCount = thisWeekBookings.length;
+      const lwCount = lastWeekBookings.length;
+      const twRev = thisWeekBookings.reduce((s, b) => s + parseFloat(b.amount), 0);
+      const lwRev = lastWeekBookings.reduce((s, b) => s + parseFloat(b.amount), 0);
+      const twAvg = twCount > 0 ? (twRev / 7).toFixed(1) : '0.0';
+      const lwAvg = lwCount > 0 ? (lwRev / 7).toFixed(1) : '0.0';
+
+      function fmtK(v) { return v >= 1000 ? '₹' + (v / 1000).toFixed(1) + 'k' : '₹' + v.toLocaleString('en-IN'); }
+
+      document.getElementById('wk-bookings').textContent = twCount;
+      document.getElementById('wk-bookings-vs').textContent = 'vs ' + lwCount;
+      document.getElementById('wk-revenue').textContent = fmtK(twRev);
+      document.getElementById('wk-revenue-vs').textContent = 'vs ' + fmtK(lwRev);
+      document.getElementById('wk-avg').textContent = twAvg;
+      document.getElementById('wk-avg-vs').textContent = 'vs ' + lwAvg;
+
+      const weekPct = pctChange(twRev, lwRev);
+      const wkChangeEl = document.getElementById('wk-change');
+      wkChangeEl.innerHTML = trendIcon(weekPct) + ' ' + Math.abs(weekPct) + '% change from last week';
+      wkChangeEl.style.color = trendColor(weekPct);
+    }
+
+    // Initialize everything on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      const totalItems = document.querySelectorAll('#booking-list .booking-item').length;
+      const countEl = document.getElementById('total-bookings-count');
+      if (countEl) countEl.textContent = totalItems;
+      filterBookings('all');
+      computeAnalytics();
+    });
   </script>
 </body>
 

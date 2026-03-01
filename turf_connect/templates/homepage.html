@@ -1002,59 +1002,24 @@
 
 
         <div class="turfs-grid">
-            <!-- Card 1 -->
+            {% for turf in turfs %}
             <div class="turf-card">
                 <div class="turf-card-img">
                     <i class="fa-solid fa-futbol"></i>
                     <span class="turf-fav"><i class="fa-regular fa-heart"></i></span>
                 </div>
                 <div class="turf-card-body">
-                    <span class="turf-price">₹1000/slot</span>
-                    <div class="turf-name">Elite Sports Arena</div>
-                    <div class="turf-location"><i class="fa-solid fa-location-dot"></i> Ahmedabad</div>
-                    <a href="#" class="turf-map">View on map</a>
+                    <span class="turf-price">Contact for price</span>
+                    <div class="turf-name">{{ turf.name }}</div>
+                    <div class="turf-location"><i class="fa-solid fa-location-dot"></i> {{ turf.city }}</div>
+                    <a href="{% url 'turf_detail' turf.id %}" class="turf-map">View Details</a>
                 </div>
             </div>
-            <!-- Card 2 -->
-            <div class="turf-card">
-                <div class="turf-card-img">
-                    <i class="fa-solid fa-baseball-bat-ball"></i>
-                    <span class="turf-fav"><i class="fa-regular fa-heart"></i></span>
-                </div>
-                <div class="turf-card-body">
-                    <span class="turf-price">₹1300/slot</span>
-                    <div class="turf-name">Summer Sports Club</div>
-                    <div class="turf-location"><i class="fa-solid fa-location-dot"></i> Vadodara</div>
-                    <a href="#" class="turf-map">View on map</a>
-                </div>
+            {% empty %}
+            <div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 40px;">
+                <p>No turfs available at the moment.</p>
             </div>
-            <!-- Card 3 -->
-            <div class="turf-card">
-                <div class="turf-card-img">
-                    <i class="fa-solid fa-table-tennis-paddle-ball"></i>
-                    <span class="turf-fav"><i class="fa-regular fa-heart"></i></span>
-                </div>
-                <div class="turf-card-body">
-                    <span class="turf-price">₹1600/slot</span>
-                    <div class="turf-name">Malabar Football...</div>
-                    <div class="turf-location"><i class="fa-solid fa-location-dot"></i> Ahmedabad</div>
-                    <a href="#" class="turf-map">View on map</a>
-                </div>
-            </div>
-            <!-- Card 4 – highlighted -->
-            <div class="turf-card" style="border-color: var(--accent);">
-                <div class="turf-card-img">
-                    <i class="fa-solid fa-shuttlecock"></i>
-                    <span class="turf-fav" style="background:rgba(0,188,212,0.3); color:var(--accent);"><i
-                            class="fa-solid fa-circle-dot"></i></span>
-                </div>
-                <div class="turf-card-body">
-                    <span class="turf-price">₹900/slot</span>
-                    <div class="turf-name">Spark Badmintons</div>
-                    <div class="turf-location"><i class="fa-solid fa-location-dot"></i> Mehsana</div>
-                    <a href="#" class="turf-map">View on map</a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </section>
 

@@ -11,11 +11,20 @@ User = get_user_model()
 
 def homepage(request):
     """General landing page for all users."""
-    return render(request, 'homepage.html')
+    turfs = Turf.objects.all()[:4]
+    return render(request, 'homepage.html', {'turfs': turfs})
 
 
 @login_required(login_url='login')
 def player_home(request):
+    if request.user.role != 'player':
+        return HttpResponseForbidden("Access denied.")
+    
+    turfs = Turf.objects.all()[:4]
+    return render(request, 'player_home.html', {'turfs': turfs})
+
+@login_required(login_url='login')
+def player_dashboard(request):
     if request.user.role != 'player':
         return HttpResponseForbidden("Access denied.")
     return render(request, 'playerdashboard.html')
@@ -23,6 +32,14 @@ def player_home(request):
 
 @login_required(login_url='login')
 def owner_home(request):
+    if request.user.role != 'owner':
+        return HttpResponseForbidden("Access denied.")
+        
+    turfs = Turf.objects.all()[:4]
+    return render(request, 'owner_home.html', {'turfs': turfs})
+
+@login_required(login_url='login')
+def owner_dashboard(request):
     if request.user.role != 'owner':
         return HttpResponseForbidden("Access denied.")
 
@@ -33,6 +50,11 @@ def owner_home(request):
     }
     return render(request, 'ownerdashboard.html', context)
 
+
+@login_required(login_url='login')
+def booking_history(request):
+    bookings = request.user.turf_bookings.all().order_by('-created_at')
+    return render(request, 'bookinghistorypage.html', {'bookings': bookings})
 
 @login_required(login_url='login')
 def admin_dashboard(request):

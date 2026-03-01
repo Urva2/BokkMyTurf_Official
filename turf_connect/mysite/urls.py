@@ -30,11 +30,14 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
 
     # Dashboards (bmt app)
-    path('player/', bmt_views.player_home, name='player_dashboard'),
-    path('owner/', bmt_views.owner_home, name='owner_dashboard'),
+    path('player/', bmt_views.player_home, name='player_home'),
+    path('player/dashboard/', bmt_views.player_dashboard, name='player_dashboard'),
+    path('owner/', bmt_views.owner_home, name='owner_home'),
+    path('owner/dashboard/', bmt_views.owner_dashboard, name='owner_dashboard'),
     path('owner/turf/<int:id>/slots/', turf_views.slot_management, name='slot_management'),
     path('admin-panel/', bmt_views.admin_dashboard, name='admin_dashboard'),
     path('admin-portal/verification/<int:turf_id>/', bmt_views.admin_verify_turf, name='admin_verify_turf'),
+    path('booking-history/', bmt_views.booking_history, name='booking_history'),
 
     # Turfs (turfs app)
     path('turf/', include('turfs.urls')),

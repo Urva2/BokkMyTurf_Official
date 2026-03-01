@@ -353,13 +353,13 @@
     }
 
     .btn-approve {
-      background-color: var(--accent-primary);
+      background-color: #00C853;
       color: #000;
     }
 
     .btn-approve:hover,
     .btn-approve:focus {
-      background-color: #00b8ff;
+      background-color: #00e65f;
       outline: none;
     }
 
@@ -377,40 +377,53 @@
     </a>
 
     <h1 class="page-title">VERIFICATION REVIEW</h1>
-    <p class="sub-title">Green Arena Sports</p>
+    <p class="sub-title">{{ turf.name }}</p>
     <p style="text-align:center; font-weight:600; font-size:16px; color: var(--text-muted); user-select:none;">
-      Status: ⏳ PENDING &nbsp;&nbsp;&nbsp; Submitted: Jan 7, 2026
+      Status: {% if turf.status == 'pending' %}⏳{% elif turf.status == 'approved' %}✔️{% else %}❌{% endif %} {{
+      turf.get_status_display|upper }} &nbsp;&nbsp;&nbsp; Submitted: {{ turf.created_at|date:"M j, Y" }}
     </p>
 
     <!-- Owner Information -->
     <section class="owner-info" aria-labelledby="owner-info-title">
-      <h2 id="owner-info-title">👤 OWNER INFORMATION</h2>
+      <h2 id="owner-info-title">OWNER INFORMATION</h2>
       <div class="owner-info-content">
-        <p>Name: Rahul Sharma</p>
-        <p>Email: rahul.sharma@email.com</p>
-        <p>Phone: +91 98765 43210</p>
-        <p>Registered: Jan 5, 2026</p>
+        <p>Name: {{ turf.owner.username }}</p>
+        <p>Email: {{ turf.owner.email }}</p>
+        <p>Phone: {{ turf.owner.phone_number }}</p>
+        <p>Registered: {{ turf.owner.date_joined|date:"M j, Y" }}</p>
       </div>
     </section>
 
     <!-- Turf Details -->
     <section class="turf-details" aria-labelledby="turf-details-title">
-      <h2 id="turf-details-title">🏟️ TURF DETAILS</h2>
+      <h2 id="turf-details-title">TURF DETAILS</h2>
       <div class="turf-details-content">
-        <p><strong>Turf Name:</strong> Green Arena Sports Complex</p>
-        <p><strong>Location:</strong><br />123, Sports Complex Road, Andheri West<br />Mumbai, Maharashtra - 400058</p>
-        <p><strong>Google Maps:</strong> <a href="https://maps.google.com/..." target="_blank"
-            rel="noopener noreferrer">https://maps.google.com/...</a> <a href="https://maps.google.com/..."
-            target="_blank" rel="noopener noreferrer" aria-label="View on map">🗺️ View on Map</a></p>
-        <p><strong>Description:</strong><br />Premium sports facility with FIFA-approved artificial turf, professional
-          floodlights.</p>
-        <p><strong>Facilities:</strong> Parking, Floodlights, Washroom, Changing Room, Drinking Water, First Aid</p>
+        <p><strong>Turf Name:</strong> {{ turf.name }}</p>
+        <p><strong>Location:</strong><br />{{ turf.address }}<br />{{ turf.city }}, {{ turf.state }}</p>
+        <p><strong>Google Maps:</strong>
+          {% if turf.google_maps_url %}
+          <a href="{{ turf.google_maps_url }}" target="_blank" rel="noopener noreferrer">{{ turf.google_maps_url }}</a>
+          <a href="{{ turf.google_maps_url }}" target="_blank" rel="noopener noreferrer" aria-label="View on map">🗺️
+            View on Map</a>
+          {% else %}
+          Not provided
+          {% endif %}
+        </p>
+        <p><strong>Description:</strong><br />{{ turf.description }}</p>
+        <p><strong>Facilities:</strong>
+          {% if turf.facilities %}
+          {{ turf.facilities|join:", " }}
+          {% if turf.additional_facilities %}, {{ turf.additional_facilities }}{% endif %}
+          {% else %}
+          {{ turf.additional_facilities }}
+          {% endif %}
+        </p>
       </div>
     </section>
 
     <!-- Submitted Images -->
     <section class="submitted-images" aria-labelledby="submitted-images-title">
-      <h2 id="submitted-images-title">📸 SUBMITTED IMAGES</h2>
+      <h2 id="submitted-images-title">SUBMITTED IMAGES</h2>
       <div class="images-grid" role="list" aria-label="Submitted turf images">
         {% if turf_images %}
         {% for image in turf_images %}
@@ -427,13 +440,13 @@
     </section>
 
     <section class="verification-docs" aria-labelledby="verification-docs-title">
-      <h2 id="verification-docs-title">📄 VERIFICATION DOCUMENTS</h2>
+      <h2 id="verification-docs-title">VERIFICATION DOCUMENTS</h2>
 
       {% if verification_documents %}
 
       <!-- Identity Proof -->
       <div class="doc-item">
-        <span>Identity Proof</span>
+        <span>1. Identity Proof</span>
         {% if verification_documents.identity_proof %}
         <span class="doc-filename">{{ verification_documents.identity_proof.name }}</span>
         <div class="doc-actions">
@@ -447,7 +460,7 @@
 
       <!-- Ownership Agreement -->
       <div class="doc-item">
-        <span>Ownership Agreement</span>
+        <span>2. Ownership Agreement</span>
         {% if verification_documents.ownership_agreement %}
         <span class="doc-filename">{{ verification_documents.ownership_agreement.name }}</span>
         <div class="doc-actions">
@@ -461,7 +474,7 @@
 
       <!-- Municipal Permission -->
       <div class="doc-item">
-        <span>Municipal Permission</span>
+        <span>3. Municipal Permission</span>
         {% if verification_documents.municipal_permission %}
         <span class="doc-filename">{{ verification_documents.municipal_permission.name }}</span>
         <div class="doc-actions">
@@ -475,7 +488,7 @@
 
       <!-- GST Certificate (Optional) -->
       <div class="doc-item">
-        <span>GST Certificate</span>
+        <span>4. GST Certificate</span>
         {% if verification_documents.gst_certificate %}
         <span class="doc-filename">{{ verification_documents.gst_certificate.name }}</span>
         <div class="doc-actions">
@@ -507,10 +520,10 @@
 
         <div class="action-buttons">
           <button type="submit" name="action" value="reject" class="btn btn-reject" aria-label="Reject turf">
-            <i class="fa-solid fa-xmark"></i> ✗ REJECT TURF
+            <i class="fa-solid fa-xmark"></i> REJECT TURF
           </button>
           <button type="submit" name="action" value="approve" class="btn btn-approve" aria-label="Approve turf">
-            <i class="fa-solid fa-check"></i> ✓ APPROVE TURF
+            <i class="fa-solid fa-check"></i> APPROVE TURF
           </button>
         </div>
       </form>

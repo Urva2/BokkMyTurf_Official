@@ -374,7 +374,7 @@
         <div class="password-wrapper">
           <input id="owner-password" name="password1" type="password" placeholder="Create a strong password"
             autocomplete="new-password" required aria-required="true" />
-          <button type="button" class="toggle-password" aria-label="Password visibility toggle" tabindex="-1" disabled>
+          <button type="button" class="toggle-password" aria-label="Password visibility toggle" tabindex="0">
             <i class="fa-regular fa-eye"></i>
           </button>
         </div>
@@ -402,9 +402,29 @@
     </div>
 
     <p style="text-align:center; color: var(--text-muted); margin-top: 24px; user-select:none;">
-      ℹ️ After registration, you can add your turf and submit for verification
+      After registration, you can add your turf and submit for verification
     </p>
   </main>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleButtons = document.querySelectorAll('.toggle-password');
+      toggleButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const input = this.previousElementSibling;
+          const icon = this.querySelector('i');
+          if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+          } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

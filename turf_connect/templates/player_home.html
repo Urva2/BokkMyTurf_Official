@@ -1,0 +1,1187 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookMyTurf â?" Find & Book Premium Sports Turfs</title>
+    <meta name="description"
+        content="BookMyTurf is India's premier platform to discover and book premium sports turfs near you. Real-time availability, instant booking." />
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+
+    <style>
+        :root {
+            --bg-dark: #1a1a1a;
+            /* dark charcoal */
+            --bg-card: #242424;
+            /* slightly lighter charcoal */
+            --bg-card2: #2e2e2e;
+            --accent: #00bcd4;
+            /* cyan-blue */
+            --accent-dark: #0097a7;
+            --accent-glow: rgba(0, 188, 212, 0.25);
+            --text-white: #ffffff;
+            --text-muted: #a0a0a0;
+            --text-sub: #cccccc;
+            --border: rgba(0, 188, 212, 0.2);
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* ===================== NAVBAR ===================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 60px;
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+
+        .site-title {
+            font-size: 22px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-white);
+            letter-spacing: -0.3px;
+        }
+
+
+        .site-title .logo-icon {
+            width: 34px;
+            height: 34px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #000;
+            flex-shrink: 0;
+        }
+
+
+        .site-title span.accent {
+            color: var(--accent);
+        }
+
+
+        nav.nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            font-size: 15px;
+        }
+
+
+        nav.nav-links a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+            transition: color 0.25s, letter-spacing 0.25s;
+        }
+
+
+        /* underline sweep */
+        nav.nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+
+        nav.nav-links a:hover::after,
+        nav.nav-links a.active::after {
+            width: 100%;
+        }
+
+
+        nav.nav-links a:hover,
+        nav.nav-links a.active {
+            color: var(--text-white);
+            letter-spacing: 0.5px;
+        }
+
+
+        /* keep buttons from inheriting the underline/grow */
+        nav.nav-links a.btn-outline::after,
+        nav.nav-links a.btn-filled-nav::after,
+        nav.nav-links a.btn-profile-nav::after {
+            display: none;
+        }
+
+        nav.nav-links a.btn-outline:hover,
+        nav.nav-links a.btn-filled-nav:hover,
+        nav.nav-links a.btn-profile-nav:hover {
+            letter-spacing: normal;
+        }
+
+
+        .btn-outline {
+            padding: 9px 22px;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-white) !important;
+            transition: border-color 0.25s, background 0.25s;
+        }
+
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+
+        .btn-filled-nav {
+            padding: 9px 22px;
+            border-radius: 6px;
+            background: var(--accent);
+            color: #000 !important;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.25s, transform 0.2s;
+        }
+
+
+        .btn-filled-nav:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-profile-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 20px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-white) !important;
+            font-weight: 600;
+            text-decoration: none;
+            transition: border-color 0.25s, background 0.25s;
+        }
+
+        .btn-profile-nav:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+        }
+
+        .btn-profile-nav i {
+            color: var(--accent);
+            font-size: 16px;
+        }
+
+
+        /* ===================== HERO ===================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 140px 60px 80px;
+        }
+
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(0, 0, 0, 0.80) 40%, rgba(0, 188, 212, 0.08) 100%),
+                url('https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+            z-index: 0;
+        }
+
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 188, 212, 0.12);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
+
+
+        .hero h1 {
+            font-size: 76px;
+            font-weight: 900;
+            line-height: 1.0;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+
+        .hero h1 .accent {
+            color: var(--accent);
+        }
+
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-sub);
+            line-height: 1.7;
+            margin-bottom: 42px;
+            max-width: 520px;
+        }
+
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            font-size: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+        }
+
+
+        .cta-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            border: 1.5px solid var(--border);
+            color: var(--text-white);
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: border-color 0.25s, background 0.25s;
+        }
+
+
+        .cta-secondary:hover {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+
+        @keyframes bounce {
+
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+
+            50% {
+                transform: translateX(-50%) translateY(8px);
+            }
+        }
+
+
+        /* ===================== SECTION BASE ===================== */
+        section {
+            padding: 90px 60px;
+        }
+
+
+        .section-label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+
+        .section-title {
+            font-size: 44px;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+
+        .section-title .accent {
+            color: var(--accent);
+        }
+
+
+        .section-sub {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-top: 12px;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+
+        /* ===================== FEATURED TURFS ===================== */
+        .featured {
+            background-color: var(--bg-dark);
+        }
+
+
+        .featured-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+
+        .view-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: border-color 0.25s, background 0.25s;
+        }
+
+
+        .view-all:hover {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+
+        .turfs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+
+        .turf-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+
+
+        .turf-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--accent);
+            border-color: var(--accent);
+        }
+
+
+        .turf-card-img {
+            width: 100%;
+            height: 170px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 36px;
+            position: relative;
+        }
+
+
+        .turf-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        .turf-fav {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            backdrop-filter: blur(4px);
+        }
+
+
+        .turf-card-body {
+            padding: 16px;
+        }
+
+
+        .turf-price {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(0, 188, 212, 0.1);
+            padding: 3px 10px;
+            border-radius: 100px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+
+        .turf-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+
+        .turf-location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+
+        .turf-location i {
+            color: var(--accent);
+            font-size: 11px;
+        }
+
+
+        .turf-map {
+            font-size: 12px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+
+        /* ===================== HOW IT WORKS ===================== */
+        .how-it-works {
+            position: relative;
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.80)),
+                url('https://images.unsplash.com/photo-1551958219-acbc608c6377?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+            text-align: center;
+        }
+
+
+        .how-it-works .section-title,
+        .how-it-works .section-label {
+            text-align: center;
+        }
+
+
+        .how-it-works .section-sub {
+            margin: 12px auto 60px;
+            text-align: center;
+        }
+
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px 28px;
+            text-align: center;
+            backdrop-filter: blur(6px);
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+
+        .step-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+
+        .step-number {
+            width: 44px;
+            height: 44px;
+            background: rgba(0, 188, 212, 0.15);
+            border: 1.5px solid var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--accent);
+            margin: 0 auto 20px;
+        }
+
+
+        .step-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+
+        .step-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+
+        /* ===================== ABOUT / REVOLUTION ===================== */
+        .about {
+            background: var(--bg-card);
+            text-align: center;
+        }
+
+
+        .about .section-title,
+        .about .section-label {
+            text-align: center;
+        }
+
+
+        .about .section-sub {
+            margin: 14px auto 56px;
+            text-align: center;
+        }
+
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+
+        .feature-card {
+            background: var(--bg-card2);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 28px 22px;
+            text-align: center;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 188, 212, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--accent);
+            margin: 0 auto 16px;
+        }
+
+
+        .feature-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+
+        .feature-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+
+        /* ===================== WHY + MISSION ===================== */
+        .why-mission {
+            background: var(--bg-dark);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+
+        .why-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+
+        .why-list li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 15px;
+            color: var(--text-sub);
+        }
+
+
+        .why-list li i {
+            color: var(--accent);
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+
+        .mission-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 40px 36px;
+        }
+
+
+        .mission-box h3 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+
+        .mission-box h3 .accent {
+            color: var(--accent);
+        }
+
+
+        .mission-box p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: border-color 0.25s, background 0.25s;
+        }
+
+
+        .contact-btn:hover {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+
+        /* ===================== FOOTER ===================== */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 50px 60px 30px;
+        }
+
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 36px;
+        }
+
+
+        .footer-brand .site-title {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 280px;
+            line-height: 1.7;
+        }
+
+
+        .footer-links-group {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+
+        .footer-col h4 {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+
+        .footer-col a {
+            display: block;
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: color 0.25s;
+        }
+
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            background: var(--bg-card2);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 15px;
+            text-decoration: none;
+            transition: border-color 0.25s, color 0.25s, transform 0.25s;
+        }
+
+
+        .social-links a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+
+        /* ===================== RESPONSIVE ===================== */
+        @media (max-width: 1024px) {
+            .turfs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+
+            .why-mission {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 20px;
+            }
+
+
+            .hero {
+                padding: 120px 20px 60px;
+            }
+
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+
+            section {
+                padding: 60px 20px;
+            }
+
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .turfs-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            footer {
+                padding: 40px 20px 20px;
+            }
+
+
+            nav.nav-links {
+                gap: 14px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =================== HEADER =================== -->
+    <header>
+        <a href="{% url 'home' %}" class="site-title">
+            <span class="logo-icon"><i class="fa-solid fa-futbol"></i></span>
+            Book<span class="accent">My</span>Turf
+        </a>
+        <nav class="nav-links">
+            <a href="{% url 'player_home' %}" class="active">Home</a>
+            <a href="{% url 'browse_turfs' %}">Browse Turfs</a>
+            <a href="{% url 'player_dashboard' %}" class="btn-profile-nav" style="padding: 9px 14px;"
+                title="Go to Dashboard"><i class="fa-solid fa-circle-user" style="font-size: 18px;"></i></a>
+        </nav>
+    </header>
+
+
+    <!-- =================== HERO =================== -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-tag">
+                <i class="fa-solid fa-circle-check"></i>
+                India's #1 Turf Booking Platform
+            </div>
+            <h1>BOOK YOUR <span class="accent">TURF</span></h1>
+            <p>Play more. Wait less. Find nearby turfs, check availability, and book your slot in seconds.</p>
+            <div class="hero-actions">
+                <a href="{% url 'browse_turfs' %}" class="cta-primary">
+                    <i class="fa-solid fa-magnifying-glass"></i> Explore Turfs
+                </a>
+                <a href="{% url 'player_dashboard' %}" class="cta-secondary">
+                    <i class="fa-solid fa-user"></i> Dashboard
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+
+    <!-- =================== FEATURED TURFS =================== -->
+    <section class="featured" id="featured">
+        <div class="featured-header">
+            <div>
+                <div class="section-label">Top Picks</div>
+                <h2 class="section-title">FEATURED <span class="accent">TURFS</span></h2>
+                <p class="section-sub">Discover top-rated sports turfs loved by players in your area</p>
+            </div>
+            <a href="{% url 'browse_turfs' %}" class="view-all">View All Turfs <i
+                    class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+
+        <div class="turfs-grid">
+            {% for turf in turfs %}
+            <div class="turf-card">
+                <div class="turf-card-img">
+                    <i class="fa-solid fa-futbol"></i>
+                    <span class="turf-fav"><i class="fa-regular fa-heart"></i></span>
+                </div>
+                <div class="turf-card-body">
+                    <span class="turf-price">Contact for price</span>
+                    <div class="turf-name">{{ turf.name }}</div>
+                    <div class="turf-location"><i class="fa-solid fa-location-dot"></i> {{ turf.city }}</div>
+                    <a href="{% url 'turf_detail' turf.id %}" class="turf-map">View Details</a>
+                </div>
+            </div>
+            {% empty %}
+            <div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 40px;">
+                <p>No turfs available at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+    <!-- =================== HOW IT WORKS =================== -->
+    <section class="how-it-works" id="how">
+        <div class="section-label">Process</div>
+        <h2 class="section-title">SIMPLE STEPS TO<br><span class="accent">GET STARTED</span></h2>
+        <p class="section-sub">Three easy steps to book your perfect sports venue</p>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Browse Turfs</h3>
+                <p>Explore our wide selection of premium sports turfs in your area</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Select &amp; Book</h3>
+                <p>Choose your preferred date and time slot, then complete your booking</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Play &amp; Enjoy</h3>
+                <p>Show up at the turf with your verification code and enjoy the game</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =================== REVOLUTIONIZING / ABOUT =================== -->
+    <section class="about" id="about">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">REVOLUTIONIZING SPORTS<br><span class="accent">BOOKING IN INDIA</span></h2>
+        <p class="section-sub">BookMyTurf is India's premier platform connecting sports enthusiasts with premium
+            facilities.
+            We're on a mission to make sports accessible to everyone.</p>
+
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Instant Booking</h3>
+                <p>Book your preferred turf in seconds with real-time slot availability</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Secure Platform</h3>
+                <p>Bank-level security for all your transactions and personal data</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-star"></i></div>
+                <h3>Top-Rated Turfs</h3>
+                <p>Browse verified, highly-rated sports facilities reviewed by real players</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                <h3>Community Driven</h3>
+                <p>Connect with fellow players and turf owners across India</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =================== WHY + MISSION =================== -->
+    <section class="why-mission" id="why">
+        <div>
+            <div class="section-label">Why Us</div>
+            <h2 class="section-title">WHY CHOOSE<br><span class="accent">BOOKMYTURF?</span></h2>
+            <ul class="why-list">
+                <li><i class="fa-solid fa-circle-check"></i> Largest network of verified sports turfs</li>
+                <li><i class="fa-solid fa-circle-check"></i> Real-time slot availability and booking</li>
+                <li><i class="fa-solid fa-circle-check"></i> Secure and instant payment processing</li>
+                <li><i class="fa-solid fa-circle-check"></i> Direct communication with turf owners</li>
+                <li><i class="fa-solid fa-circle-check"></i> Competitive pricing with no hidden charges</li>
+                <li><i class="fa-solid fa-circle-check"></i> 24/7 customer support</li>
+                <li><i class="fa-solid fa-circle-check"></i> Mobile-friendly booking experience</li>
+            </ul>
+        </div>
+        <div class="mission-box">
+            <h3>Our <span class="accent">Mission</span></h3>
+            <p>To democratize access to sports facilities by creating a seamless, transparent, and efficient booking
+                ecosystem
+                that benefits both players and turf owners.</p>
+            <a href="#" class="contact-btn"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+        </div>
+    </section>
+
+
+    <!-- =================== FOOTER =================== -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="{% url 'player_home' %}" class="site-title">
+                    <span class="logo-icon"><i class="fa-solid fa-futbol"></i></span>
+                    Book<span class="accent">My</span>Turf
+                </a>
+                <p>India's premier platform for booking premium sports turfs near you.</p>
+            </div>
+            <div class="footer-links-group">
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <a href="{% url 'player_home' %}">Home</a>
+                    <a href="{% url 'browse_turfs' %}">Browse Turfs</a>
+                    <a href="#">About</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="{% url 'player_dashboard' %}">Dashboard</a>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 BookMyTurf. All rights reserved.</p>
+            <p>Made with <i class="fa-solid fa-heart" style="color:var(--accent);"></i> for sports lovers</p>
+        </div>
+    </footer>
+
+
+</body>
+
+
+</html>
