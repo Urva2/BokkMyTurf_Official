@@ -1047,24 +1047,6 @@
 
   <main class="container" role="main" aria-label="Turf details">
 
-    <!-- INFO CARDS -->
-    <section class="info-cards" aria-label="Turf information cards">
-      <article class="info-card" tabindex="0" aria-describedby="open-hours-label open-hours-value">
-        <i class="fa-regular fa-clock info-icon" aria-hidden="true"></i>
-        <div class="info-label" id="open-hours-label">Open Hours</div>
-        <div class="info-value" id="open-hours-value">6AM - 12AM</div>
-      </article>
-      <article class="info-card" tabindex="0" aria-describedby="turf-size-label turf-size-value">
-        <i class="fa-solid fa-ruler-combined info-icon" aria-hidden="true"></i>
-        <div class="info-label" id="turf-size-label">Turf Size</div>
-        <div class="info-value" id="turf-size-value">100x60 ft</div>
-      </article>
-      <article class="info-card" tabindex="0" aria-describedby="surface-label surface-value">
-        <i class="fa-solid fa-leaf info-icon" aria-hidden="true"></i>
-        <div class="info-label" id="surface-label">Surface</div>
-        <div class="info-value" id="surface-value">Artificial</div>
-      </article>
-    </section>
 
     <!-- ABOUT -->
     <section class="about-section" aria-labelledby="about-title">
@@ -1086,59 +1068,7 @@
       {% endfor %}
     </section>
 
-    <!-- GALLERY -->
-    <section class="gallery-section" aria-label="Gallery of turf images">
-      <h2 class="sr-only">Gallery</h2>
-      <div class="gallery-scroll" tabindex="0" aria-roledescription="carousel" aria-label="Turf image gallery">
-        <div class="gallery-item" role="group" aria-label="Image 1"
-          style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80');">
-        </div>
-        <div class="gallery-item" role="group" aria-label="Image 2"
-          style="background-image: url('https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=400&q=80');">
-        </div>
-        <div class="gallery-item" role="group" aria-label="Image 3"
-          style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80');">
-        </div>
-        <div class="gallery-item" role="group" aria-label="Image 4"
-          style="background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=400&q=80');">
-        </div>
-        <div class="gallery-item" role="group" aria-label="Image 5"
-          style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80');">
-        </div>
-      </div>
-    </section>
 
-    <!-- PRICING -->
-    <section class="pricing-section" aria-labelledby="pricing-title">
-      <h2 id="pricing-title">Pricing</h2>
-      <table class="pricing-table" role="table" aria-describedby="pricing-desc">
-        <caption id="pricing-desc" class="sr-only">Time-based pricing per hour</caption>
-        <thead>
-          <tr>
-            <th scope="col">Time Slot</th>
-            <th scope="col">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Morning (6AM - 12PM)</td>
-            <td>₹800 / hour</td>
-          </tr>
-          <tr>
-            <td>Afternoon (12PM - 5PM)</td>
-            <td>₹1000 / hour</td>
-          </tr>
-          <tr>
-            <td>Evening (5PM - 10PM)</td>
-            <td>₹1200 / hour</td>
-          </tr>
-          <tr>
-            <td>Night (10PM - 12AM)</td>
-            <td>₹1000 / hour</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
 
     <!-- SLOT BOOKING REDESIGN -->
     <section class="slot-booking-wrapper" aria-labelledby="slot-picker-title">
@@ -1215,10 +1145,7 @@
                   <i class="fa-solid fa-circle-check"></i>
                   <span>Instant Confirmation</span>
                 </div>
-                <div class="badge-item">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>Free Cancellation (24hrs)</span>
-                </div>
+
                 <div class="badge-item">
                   <i class="fa-solid fa-circle-check"></i>
                   <span>Secure Payment</span>
@@ -1436,8 +1363,8 @@
         <div class="address-text" tabindex="0">
           📍 {{ turf.address }}
         </div>
-        <a href="https://www.google.com/maps/dir/?api=1&destination={{ turf.address|urlencode }}" target="_blank"
-          rel="noopener" class="btn-directions" aria-label="Get directions to {{ turf.name }}">
+        <a href="{{ turf.google_maps_url }}" target="_blank" rel="noopener" class="btn-directions"
+          aria-label="Get directions to {{ turf.name }}">
           Get Directions →
         </a>
       </div>

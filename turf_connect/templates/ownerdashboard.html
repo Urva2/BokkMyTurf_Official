@@ -720,9 +720,6 @@
       <div class="sidebar-name">{{ request.user.username }}</div>
       <div class="sidebar-email">{{ request.user.email }}</div>
       <span class="sidebar-role">{{ request.user.get_role_display }}</span>
-      <a href="#" class="sidebar-btn">
-        <i class="fa-solid fa-pen-to-square"></i> Edit Profile
-      </a>
 
       <div class="sidebar-logout">
         <form method="post" action="{% url 'logout' %}">
