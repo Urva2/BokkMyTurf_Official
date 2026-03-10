@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import HttpResponseForbidden
 
 from turfs.models import Turf, VerificationDocument, TurfImage
+from .decorators import player_required, owner_required, admin_required
 
 User = get_user_model()
 
@@ -15,34 +14,23 @@ def homepage(request):
     return render(request, 'homepage.html', {'turfs': turfs})
 
 
-@login_required(login_url='login')
+@player_required
 def player_home(request):
-    if request.user.role != 'player':
-        return HttpResponseForbidden("Access denied.")
-    
     turfs = Turf.objects.all()[:4]
     return render(request, 'player_home.html', {'turfs': turfs})
 
-@login_required(login_url='login')
+@player_required
 def player_dashboard(request):
-    if request.user.role != 'player':
-        return HttpResponseForbidden("Access denied.")
     return render(request, 'playerdashboard.html')
 
 
-@login_required(login_url='login')
+@owner_required
 def owner_home(request):
-    if request.user.role != 'owner':
-        return HttpResponseForbidden("Access denied.")
-        
     turfs = Turf.objects.all()[:4]
     return render(request, 'owner_home.html', {'turfs': turfs})
 
-@login_required(login_url='login')
+@owner_required
 def owner_dashboard(request):
-    if request.user.role != 'owner':
-        return HttpResponseForbidden("Access denied.")
-
     owner_turfs = Turf.objects.filter(owner=request.user).order_by('-created_at')
 
     context = {
@@ -51,16 +39,13 @@ def owner_dashboard(request):
     return render(request, 'ownerdashboard.html', context)
 
 
-@login_required(login_url='login')
+@player_required
 def booking_history(request):
     bookings = request.user.turf_bookings.all().order_by('-created_at')
     return render(request, 'bookinghistorypage.html', {'bookings': bookings})
 
-@login_required(login_url='login')
+@admin_required
 def admin_dashboard(request):
-    if request.user.role != 'admin':
-        return HttpResponseForbidden("Access denied.")
-
     from bookings.models import Booking
 
     context = {
@@ -73,11 +58,8 @@ def admin_dashboard(request):
     return render(request, 'admindashboard.html', context)
 
 
-@login_required(login_url='login')
+@admin_required
 def admin_verify_turf(request, turf_id):
-    if request.user.role != 'admin':
-        return HttpResponseForbidden("Access denied.")
-
     turf = get_object_or_404(Turf, id=turf_id)
 
     if request.method == 'POST':
@@ -103,4 +85,3 @@ def admin_verify_turf(request, turf_id):
         'turf_images': turf_images,
     }
     return render(request, 'turfverificationdetail.html', context)
-

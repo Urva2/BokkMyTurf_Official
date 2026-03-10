@@ -3,10 +3,9 @@ import json
 import uuid
 import random
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import HttpResponseForbidden, JsonResponse
-from django.views.decorators.csrf import csrf_exempt # Optional, but often helpful for API-like views
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime, time, timedelta
 
 from django.db import transaction
@@ -14,13 +13,12 @@ from django.db.models import Count, Q
 from django.utils import timezone
 from .forms import AddTurfForm
 from .models import Turf, TurfImage, VerificationDocument, Slot, Booking, Payment
+from bmt.decorators import player_required, owner_required
 
 
-@login_required(login_url='login')
+@owner_required
 def add_turf(request):
     """Allow turf owners to submit a new turf listing."""
-    if request.user.role != 'owner':
-        return HttpResponseForbidden("Access denied.")
 
     if request.method == 'POST':
         form = AddTurfForm(request.POST, request.FILES)
@@ -54,11 +52,9 @@ def add_turf(request):
     return render(request, 'addturf.html', {'form': form})
 
 
-@login_required(login_url='login')
+@owner_required
 def edit_turf(request, turf_id):
     """Allow turf owners to edit and resubmit a rejected turf."""
-    if request.user.role != 'owner':
-        return HttpResponseForbidden("Access denied.")
 
 
     turf = get_object_or_404(Turf, id=turf_id, owner=request.user)
@@ -194,10 +190,9 @@ def turf_detail(request, turf_id):
         'now_time': now_time,
     })
 
+@owner_required
 def slot_management(request, id):
     """Display the slot management page for a specific turf."""
-    if request.user.role != 'owner':
-        return HttpResponseForbidden("Access denied.")
     
     turf = get_object_or_404(Turf, id=id, owner=request.user)
     
@@ -492,7 +487,7 @@ def slot_management(request, id):
     }
     return render(request, 'slotmanagement.html', context)
 
-@login_required
+@owner_required
 def delete_slot(request, slot_id):
     """Deletes a time slot if it belongs to the owner and is not booked."""
     now = timezone.localtime()
@@ -522,7 +517,7 @@ def delete_slot(request, slot_id):
         
     return redirect(f"{reverse('slot_management', args=[turf_id])}?date={date_str}")
 
-@login_required
+@player_required
 @csrf_exempt
 def hold_slot(request):
     """Temporarily hold multiple slots for 5 minutes atomically and create a pending booking."""
@@ -600,7 +595,7 @@ def hold_slot(request):
             
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
 
-@login_required
+@player_required
 def booking_summary(request):
     """Display the summary of a pending booking."""
     expire_pending_bookings()
@@ -619,7 +614,7 @@ def booking_summary(request):
     return render(request, 'booking_summary.html', {'booking': booking})
 
 
-@login_required
+@player_required
 def payment_page(request):
     """Display the payment page for a pending booking."""
     expire_pending_bookings()
@@ -638,7 +633,7 @@ def payment_page(request):
     return render(request, 'payment.html', {'booking': booking})
 
 
-@login_required
+@player_required
 def payment_process(request):
     """Process the payment for a booking."""
     if request.method != "POST":
@@ -704,7 +699,7 @@ def payment_process(request):
         return redirect('payment_page')
 
 
-@login_required
+@player_required
 def booking_success(request, booking_id):
     """Show the success message after payment."""
     booking = get_object_or_404(Booking, id=booking_id, player=request.user)
@@ -719,7 +714,7 @@ def booking_success(request, booking_id):
         'booking': booking,
         'payment': payment
     })
-@login_required
+@player_required
 def cancel_booking(request):
     """Allow user to cancel their pending booking and release slots."""
     booking_id = request.session.get('booking_id')
